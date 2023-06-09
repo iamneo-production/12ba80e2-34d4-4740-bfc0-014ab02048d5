@@ -1,0 +1,58 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="input-group w-50 mx-auto mt-4" id="search-bar">
+  <input
+  id="searchStudent"
+    type="text"
+    class="form-control"
+    placeholder="Search the student by name..."
+    [(ngModel)]="searchInInput"
+  />
+</div>
+  <button class="btn addstudent m-2 p-2"  routerLink="/admin/viewCourse"
+  (click)="addStudent()" id="addStudent">
+    Add new student <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
+  </button>
+  <p class="text-center fw-bold fs-3 allStudents">All Students Data</p>
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">StudentID</th>
+      <th scope="col">Student name</th>
+      <th scope="col">Enrolled Course</th>
+      <th scope="col">Mobile Number</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody style="backdrop-filter: blur(4px)">
+    <ng-container *ngFor="let course of allCourses">
+      <ng-container
+        *ngFor="let student of allStudents | studentFilter : searchInInput; let i=index;"
+      >
+        <tr *ngIf="course.courseId === student.courseID" id="studentGrid{{i+1}}">
+          <th scope="row">{{ student.id }}</th>
+          <td>{{ student.firstname + " " + student.lastname }}</td>
+          <td>{{ course.courseName }}</td>
+          <td>{{ student.phonenumber }}</td>
+          <td>
+            <div>
+              <a class="edit pe-3" id="adminEditStudent"
+                ><fa-icon
+                  [icon]="faPenToSquare"
+                  routerLink="/admin/editStudent/{{ student.id }}"
+                ></fa-icon
+              ></a>
+              <a class="delete pe-2"
+              id="adminDeleteStudent"
+                ><fa-icon
+                  [icon]="faTrashCan"
+                  routerLink="/admin/deleteStudent/{{ student.id }}"
+                  (click)="onDeleteStudent(student.id)"
+                ></fa-icon
+              ></a>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>
