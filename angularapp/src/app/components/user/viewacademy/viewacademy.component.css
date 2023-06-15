@@ -1,0 +1,35 @@
+.cards {
+    width: 85%;
+    margin: auto;
+  }
+  #card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: none;
+    transition: transform 0.3s;
+  }
+  #card .card-body {
+    padding: 1rem;
+  }
+  #card:hover {
+    transform: scale(1.03);
+  }
+  #search-bar {
+    text-align: center;
+  }
+  #search-bar input {
+    padding: 20px;
+    width: 200px;
+  }
+  .image-container {
+    position: relative;
+  }
+  .image-container img {
+    width: 100%;
+    height: 80vh;
+  }
+  .academy-heading{
+      background-color: var(--accent);
+  }
+  p,a,h5{
+      color: var(--secondary);
+  }

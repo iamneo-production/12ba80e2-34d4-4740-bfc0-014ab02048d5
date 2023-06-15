@@ -71,4 +71,5 @@ export class AcademyService {
   deleteStudent(id: number) {
     return this.http.delete<any>(`${this.StudentURL}/${id}`);
   }
+  
 }

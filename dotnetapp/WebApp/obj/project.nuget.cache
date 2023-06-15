@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YQU6EG9sISHowm8/cQMBiBHVkfl4vueupTV/Go5VjIPbXx/eO7HxuJbD74UKmMf4es5GCiroOIBuW6zq5QcXvg==",
+  "dgSpecHash": "QhzGzwRni/yO6TBbIWTBHQB5uwo+nHm10L9ncTA6AzIq8si8pmjzifoSnCjIkqiZs4LXI2ggVR0lF2qI+EnQcw==",
   "success": true,
   "projectFilePath": "/home/coder/project/workspace/dotnetapp/WebApp/WebApp.csproj",
   "expectedPackageFiles": [
@@ -22,10 +22,10 @@
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore/5.0.17/microsoft.entityframeworkcore.5.0.17.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.abstractions/5.0.17/microsoft.entityframeworkcore.abstractions.5.0.17.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.analyzers/5.0.17/microsoft.entityframeworkcore.analyzers.5.0.17.nupkg.sha512",
-    "/home/coder/.nuget/packages/microsoft.entityframeworkcore.design/5.0.17/microsoft.entityframeworkcore.design.5.0.17.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.entityframeworkcore.design/5.0.0/microsoft.entityframeworkcore.design.5.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.relational/5.0.17/microsoft.entityframeworkcore.relational.5.0.17.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.entityframeworkcore.sqlserver/5.0.17/microsoft.entityframeworkcore.sqlserver.5.0.17.nupkg.sha512",
-    "/home/coder/.nuget/packages/microsoft.entityframeworkcore.tools/5.0.17/microsoft.entityframeworkcore.tools.5.0.17.nupkg.sha512",
+    "/home/coder/.nuget/packages/microsoft.entityframeworkcore.tools/5.0.0/microsoft.entityframeworkcore.tools.5.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.extensions.caching.abstractions/5.0.0/microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "/home/coder/.nuget/packages/microsoft.extensions.caching.memory/5.0.0/microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",

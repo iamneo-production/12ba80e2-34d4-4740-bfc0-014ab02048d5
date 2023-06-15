@@ -16,7 +16,7 @@
 </button>
 <p class="text-center fw-bold fs-3 allcourses">{{academyname}} Courses</p>
 <div id="course">
-  <ng-container *ngFor="let course of allCourses | filter : searchInInput; let i=index">
+  <ng-container *ngFor="let course of allCourses | filter : searchInInput:'courseName'; let i=index">
     <div class="card" *ngIf="course.instituteID == Instituteid">
       <div id="courseGrid{{i}}">
       <div class="card-header text-center fs-3 fw-bold text-uppercase">

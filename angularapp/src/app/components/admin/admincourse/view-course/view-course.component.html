@@ -15,7 +15,7 @@
 <p class="text-center fw-bold fs-3 allcourses">All Courses</p>
 
   <div  id="course">
-  <ng-container  *ngFor="let course of allCourses | filter : searchInInput;let i=index">
+  <ng-container  *ngFor="let course of allCourses | filter : searchInInput:'courseName';let i=index">
     <ng-container *ngFor="let academy of allAcademy">
       <div class="card" *ngIf="course.instituteID == academy.instituteId">
         <div id="courseGrid{{i}}">

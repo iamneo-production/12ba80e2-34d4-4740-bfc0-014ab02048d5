@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private notif: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.auth.userLogin(this.loginForm.value).subscribe((res) => {
           this.notif.success('Success', res.Message, { timeOut: 5000 });
           this.auth.storeToken(res.token);
-          console.log('login to user dashboard');
+          this.router.navigate(['user/login']);
         });
       } catch (error) {
         console.log('ok you r not a user');
@@ -61,23 +61,23 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['admin/viewInstitutes']);
         });
       } catch (error) {
-        console.log('not a admin'+error);
+        console.log('not a admin' + error);
       }
-    }else{
-      this.notif.error('Wrong email or password','ERROR!!!',{timeOut:3000});
+    } else {
+      this.notif.error('Wrong email or password', 'ERROR!!!', { timeOut: 3000 });
     }
   }
-  signupLink(){
+  signupLink() {
     this.router.navigate(['/signup']);
   }
-  toggle(){
-    if(this.show){
-       this.show=false;
-       this.passType="password";
+  toggle() {
+    if (this.show) {
+      this.show = false;
+      this.passType = "password";
     }
     else {
-      this.show=true;
-      this.passType="text";
+      this.show = true;
+      this.passType = "text";
     }
   }
 }

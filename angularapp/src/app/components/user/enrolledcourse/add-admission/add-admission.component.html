@@ -1,0 +1,418 @@
+<app-user-navbar></app-user-navbar>
+<p class="text-center fw-bolder fs-2 p-2 my-2" style="background-color: var(--accent);">Add Student</p>
+<form class="p-4" [formGroup]="addStudentForm">
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faUser"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="firstname"
+            formControlName="firstname"
+          />
+          <label class="form-label">Firstname</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('firstname').errors &&
+          addStudentForm.get('firstname').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your firstname !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faUser"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="lastname"
+            formControlName="lastname"
+          />
+          <label class="form-label">Lastname</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('lastname').errors &&
+          addStudentForm.get('lastname').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your lastname !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faVenusMars"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="gender"
+            formControlName="gender"
+          />
+          <label class="form-label">Gender</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('gender').errors &&
+          addStudentForm.get('gender').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your gender !</p>
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="row p-3">
+      <div class="col">
+        <div class="input-group mb-3">
+          <span class="input-group-text"
+            ><fa-icon [icon]="faPerson"></fa-icon
+          ></span>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="fathername"
+              formControlName="fathername"
+            />
+            <label class="form-label">Fathername</label>
+          </div>
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            addStudentForm.get('fathername').errors &&
+            addStudentForm.get('fathername').touched
+          "
+        >
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p>Please enter your fathername !</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="input-group mb-3">
+          <span class="input-group-text"
+            ><fa-icon [icon]="faMobile"></fa-icon
+          ></span>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="phonenumber"
+              formControlName="phonenumber"
+            />
+            <label class="form-label">Phone Number</label>
+          </div>
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            addStudentForm.get('phonenumber').errors &&
+            addStudentForm.get('phonenumber').touched
+          "
+        >
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p>Please enter your phonenumber !</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="input-group mb-3">
+          <span class="input-group-text"
+            ><fa-icon [icon]="faMobile"></fa-icon
+          ></span>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="alternatenumberr"
+              formControlName="alternatenumber"
+            />
+            <label class="form-label">Alternate Phone Number</label>
+          </div>
+        </div>
+        <div
+          class="error"
+          *ngIf="
+            addStudentForm.get('alternatenumber').errors &&
+            addStudentForm.get('alternatenumber').touched
+          "
+        >
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p>Please enter your alternatenumber !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faPersonDress"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="mothername"
+            formControlName="mothername"
+          />
+          <label class="form-label">Mother name</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('mothername').errors &&
+          addStudentForm.get('mothername').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your mother name !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faEnvelope"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="email"
+            formControlName="email"
+          />
+          <label class="form-label">Email</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('email').errors &&
+          addStudentForm.get('email').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your email !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faUser"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="age"
+            formControlName="age"
+          />
+          <label class="form-label">age</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('age').errors &&
+          addStudentForm.get('age').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your age !</p>
+      </div>
+    </div>
+  </div>
+<div class="additional-info"> <p class="fs-5 fst-italic ms-3">Some Additional Information</p>
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faHouse"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="housenumber"
+            formControlName="housenumber"
+          />
+          <label class="form-label">House Number</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('housenumber').errors &&
+          addStudentForm.get('housenumber').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your house number !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faRoad"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="street"
+            formControlName="street"
+          />
+          <label class="form-label">Street Address</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('street').errors &&
+          addStudentForm.get('street').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your street address !</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faRoad"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="area"
+            formControlName="area"
+          />
+          <label class="form-label">Area</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('area').errors &&
+          addStudentForm.get('area').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your area !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faMobile"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="passcode"
+            formControlName="passcode"
+          />
+          <label class="form-label">Passcode</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('passcode').errors &&
+          addStudentForm.get('passcode').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your passcode !</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faHouse"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="state"
+            formControlName="state"
+          />
+          <label class="form-label">State</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('state').errors &&
+          addStudentForm.get('state').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your state !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faHouse"></fa-icon
+        ></span>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="nationality"
+            formControlName="nationality"
+          />
+          <label class="form-label">Nationality</label>
+        </div>
+      </div>
+      <div
+        class="error"
+        *ngIf="
+          addStudentForm.get('nationality').errors &&
+          addStudentForm.get('nationality').touched
+        "
+      >
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your nationality !</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="">
+    <button class="btn addstudent" (click)="onAddStudent()">
+      Add Student <fa-icon [icon]="faChessBishop"></fa-icon>
+    </button>
+  </div>
+</form>

@@ -49,6 +49,9 @@ export class EditInstituteComponent implements OnInit {
       email: new FormControl(null, [Validators.required]),
       instituteAddress: new FormControl(null, [Validators.required]),
       instituteDescription: new FormControl(null, [Validators.required]),
+      rating: new FormControl(),
+      userGiveRating: new FormControl(),
+      averageRating: new FormControl(),
     });
     console.log(this.activeRouter.snapshot.params['id']);
     this.academy
@@ -63,6 +66,9 @@ export class EditInstituteComponent implements OnInit {
         this.updateAcademyForm.get('email').setValue(res.email);
         this.updateAcademyForm.get('instituteAddress').setValue(res.instituteAddress);
         this.updateAcademyForm.get('instituteDescription').setValue(res.instituteDescription);
+        this.updateAcademyForm.get('rating').setValue(res.rating);
+        this.updateAcademyForm.get('userGiveRating ').setValue(res.userGiveRating );
+        this.updateAcademyForm.get('averageRating ').setValue(res.averageRating );
       });
   }
   onUpdateAcademy() {
