@@ -39,32 +39,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required,Validators.email]),
       password: new FormControl(null, [Validators.required]),
     });
   }
   onLogin() {
     if (this.loginForm.valid) {
-      try {
-        this.auth.userLogin(this.loginForm.value).subscribe((res) => {
-          this.notif.success('Success', res.Message, { timeOut: 5000 });
+      this.auth.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          this.loginForm.reset();
           this.auth.storeToken(res.token);
-          this.router.navigate(['user/login']);
-        });
-      } catch (error) {
-        console.log('ok you r not a user');
-      }
-      try {
-        this.auth.adminLogin(this.loginForm.value).subscribe((res) => {
-          this.notif.success('Admin Logged in', res.Message, { timeOut: 5000 });
-          this.auth.storeToken(res.token);
-          this.router.navigate(['admin/viewInstitutes']);
-        });
-      } catch (error) {
-        console.log('not a admin' + error);
-      }
-    } else {
-      this.notif.error('Wrong email or password', 'ERROR!!!', { timeOut: 3000 });
+          this.notif.success('SUCCESS',res.message,{timeOut: 3000});
+          if(this.auth.getRole()==='admin'){
+            this.router.navigate(['/admin/viewInstitutes']); 
+          }else{
+            this.router.navigate(['/user/login']); 
+          }
+          
+        },
+        error: (err) => {
+          this.notif.error('Error','Incorrect email and password',{timeOut:3000});
+        },
+      });
+    }
+     else {
+      this.notif.error('Invalid details', 'ERROR!!!', { timeOut: 3000 });
     }
   }
   signupLink() {

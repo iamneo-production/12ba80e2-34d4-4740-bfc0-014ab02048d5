@@ -16,13 +16,12 @@ export class AuthService {
   adminRegister(data:any){
     return this.http.post<any>(`${this.baseURL}/adminRegister`,data);
   }
-  userLogin(data:any){
-    return this.http.post<any>(`${this.baseURL}/userLogin`,data);
+  userRegisterSendEmail(data:any){
+    return this.http.post<any>(`${this.baseURL}/sendEmail`,data);
   }
-  adminLogin(data:any){
-    return this.http.post<any>(`${this.baseURL}/adminLogin`,data);
+  login(data:any){
+    return this.http.post<any>(`${this.baseURL}/login`,data);
   }
-
   storeToken(tokenValue: string){
     localStorage.setItem('token',tokenValue);
   }

@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'admin/deleteCourse/:id',component:ViewCourseComponent,canActivate:[AuthGuard]},
   
   {path:'admin/viewStudent',component:ViewStudentComponent,canActivate:[AuthGuard]},
-  {path:'admin/addStudent/:id',component:AddStudentComponent,canActivate:[AuthGuard]},
+  {path:'admin/addStudent',component:AddStudentComponent,canActivate:[AuthGuard]},
   {path:'admin/editStudent/:id',component:EditStudentComponent,canActivate:[AuthGuard]},
   {path:'admin/deleteStudent/:id',component:ViewStudentComponent,canActivate:[AuthGuard]},
 

@@ -5,8 +5,10 @@
     id="searchAcademy"
     class="form-control"
     placeholder="Search the academy by name..."
-    [(ngModel)]="searchInInput"
+    [(ngModel)]="inputvalue"
   />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
 </div>
 <button class="btn addacademy" routerLink="/admin/addInstitute">
   Add new academy <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>

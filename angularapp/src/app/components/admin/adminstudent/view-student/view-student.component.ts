@@ -26,7 +26,6 @@ export class ViewStudentComponent implements OnInit {
   faTrashCan = faTrash;
   faChessBishop = faChessBishop;
   studentID = '';
-  searchInInput = '';
   ngOnInit(): void {
     this.academy.getStudent().subscribe((res) => {
       for (let i = 0; i < res.length; i++) {
@@ -41,11 +40,7 @@ export class ViewStudentComponent implements OnInit {
   }
 
   addStudent() {
-    this.toaster.warning(
-      'Select the course in which you want to enroll student',
-      'Select Your Course',
-      { timeOut: 5000 }
-    );
+    this.router.navigate(['admin/addStudent']);
   }
   onDeleteStudent(id: number) {
     this.academy.deleteStudent(id).subscribe((res) => {
@@ -54,5 +49,10 @@ export class ViewStudentComponent implements OnInit {
       });
       location.reload();
     });
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

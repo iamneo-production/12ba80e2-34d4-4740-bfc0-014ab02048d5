@@ -2,7 +2,7 @@ form {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   border: none;
-  width: 500px;
+  width: 600px;
   padding: 1rem 2rem;
   margin: 20px auto;
   background-color: var(--primary);

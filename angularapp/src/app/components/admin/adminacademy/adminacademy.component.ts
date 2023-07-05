@@ -15,7 +15,6 @@ export class AdminacademyComponent implements OnInit {
   faTrashCan=faTrash;
   faPlus=faSquare;
   faChessBishop=faChessBishop;
-  searchInInput= '';
   adminAcademyGridNumber:number=0;
   
   constructor(private toaster:ToastrService,private router:Router,private auth: AuthService,private academy:AcademyService,private activeRouter:ActivatedRoute){}
@@ -41,5 +40,10 @@ export class AdminacademyComponent implements OnInit {
       })
       location.reload();
     })
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

@@ -22,11 +22,11 @@ export class EnrolledcourseComponent implements OnInit{
   courses=[];
   academies=[];
   loginID;
-  searchInInput = '';
-  faSearch = faSearch;
+  
   faPenToSquare = faPenSquare;
   faTrashCan = faTrash;
   faChessBishop = faChessBishop;
+  faSearch=faSearch;
   feedbackForm: FormGroup;
   instituteId;
   ngOnInit(): void {
@@ -96,5 +96,10 @@ export class EnrolledcourseComponent implements OnInit{
     }else{
       this.toaster.error("Feedback form invalid!!!");
     }
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

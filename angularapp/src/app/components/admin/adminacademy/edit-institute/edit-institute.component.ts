@@ -43,17 +43,17 @@ export class EditInstituteComponent implements OnInit {
   ngOnInit() {
     this.updateAcademyForm = new FormGroup({
       instituteId: new FormControl(),
-      instituteName: new FormControl(null, [Validators.required]),
-      mobile: new FormControl(null, [Validators.required]),
+      instituteName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
+      mobile: new FormControl(null, [Validators.required,Validators.pattern(/^\d{10}$/)]),
       image: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required,Validators.email]),
       instituteAddress: new FormControl(null, [Validators.required]),
       instituteDescription: new FormControl(null, [Validators.required]),
       rating: new FormControl(),
       userGiveRating: new FormControl(),
       averageRating: new FormControl(),
     });
-    console.log(this.activeRouter.snapshot.params['id']);
+    
     this.academy
       .getAcademyById(this.activeRouter.snapshot.params['id'])
       .subscribe((res) => {

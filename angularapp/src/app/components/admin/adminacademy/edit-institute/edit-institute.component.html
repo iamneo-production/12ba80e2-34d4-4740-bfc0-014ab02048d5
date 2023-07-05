@@ -30,8 +30,8 @@
           updateAcademyForm.get('instituteName').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your Academy Name !</p>
+        <p *ngIf="updateAcademyForm.get('instituteName').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your Academy Name !</p>
+        <p *ngIf="updateAcademyForm.get('instituteName').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Special characters are not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -57,8 +57,9 @@
           updateAcademyForm.get('mobile').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy contact number !</p>
+        
+        <p *ngIf="updateAcademyForm.get('mobile').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your academy contact number !</p>
+        <p *ngIf="updateAcademyForm.get('mobile').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Incorrect format !</p>
       </div>
     </div>
   </div>
@@ -113,8 +114,8 @@
           updateAcademyForm.get('email').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy email !</p>
+        <p *ngIf="updateAcademyForm.get('email').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your academy email !</p>
+        <p *ngIf="updateAcademyForm.get('email').errors.email"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is not correct !</p>
       </div>
     </div>
   </div>

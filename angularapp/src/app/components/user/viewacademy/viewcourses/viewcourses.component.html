@@ -4,8 +4,10 @@
     type="text"
     class="form-control"
     placeholder="Search the course by name..."
-    [(ngModel)]="searchInInput"
+    [(ngModel)]="inputvalue"
   />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
 </div>
 <p class="text-center fw-bold fs-3 mt-3 allcourses">{{academyname}} Courses</p>
 <div id="course">

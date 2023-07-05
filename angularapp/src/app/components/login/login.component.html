@@ -1,3 +1,4 @@
+<p class="h1 fs-1 text-center p-4 fw-bolder" style="background-color: var(--accent); color:var(--primary)">CHESS ACADEMY PORTAL</p>
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="mt-5">
   <p id="welcome" class="p-2 text-center fs-3">
     Login Please
@@ -24,6 +25,10 @@
     <p *ngIf="loginForm.get('email').errors.required">
       <fa-icon [icon]="faTriangleExclamation"></fa-icon>Please enter your email
       !
+    </p>
+    <p *ngIf="loginForm.get('email').errors.email">
+      <fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is
+      incorrect !
     </p>
   </div>
   <div class="input-group mb-3">

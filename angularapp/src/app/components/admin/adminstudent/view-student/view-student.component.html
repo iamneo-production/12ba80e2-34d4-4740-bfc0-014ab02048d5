@@ -5,8 +5,10 @@
     type="text"
     class="form-control"
     placeholder="Search the student by name..."
-    [(ngModel)]="searchInInput"
+    [(ngModel)]="inputvalue"
   />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
 </div>
   <button class="btn addstudent m-2 p-2"  routerLink="/admin/viewCourse"
   (click)="addStudent()" id="addStudent">

@@ -10,6 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
+using MimeKit;
+using MailKit.Net.Smtp;
+using MailKit.Security;
 
 namespace WebApp.Controller{
     [Route("api/[controller]")]
@@ -20,23 +23,22 @@ namespace WebApp.Controller{
         public AuthController(AppDbContext appDbContext){
             _authContext=appDbContext;
         }
-    [HttpPost("userLogin")]
-     public async Task<IActionResult> isUserPresent([FromBody] Login obj){
+    [HttpPost("login")]
+        public async Task<IActionResult> login([FromBody] Login obj){
         if (obj == null) return BadRequest();
-    
         var user=await _authContext.Users.FirstOrDefaultAsync(x=> x.email==obj.email && x.password==obj.password);
-        if(user == null) return NotFound(new { Message = "User Not Found! " });
-        user.Token = createJwt(user);
-        return Ok(new{ Message="User Logged in Successfully!", userRole="USER",Token=user.Token });
-    }
-    [HttpPost("adminLogin")]
-     public async Task<IActionResult> isAdminPresent([FromBody] Login obj){
-        if (obj == null) return BadRequest();
         var admin=await _authContext.Admins.FirstOrDefaultAsync(x=> x.email==obj.email && x.password==obj.password);
-        if(admin == null) return NotFound(new { Message = "Admin Not Found! " });
-         admin.Token = createJwt(admin);
-        return Ok(new {Message="Admin Logged in Successfully!", userRole="ADMIN", Token=admin.Token});
-    } 
+        
+        if(user != null){
+            user.Token = createJwt(user);
+            return Ok(new{ Message="User Logged in Successfully!",Token=user.Token });  
+        } 
+        else if(admin != null){
+            admin.Token = createJwt(admin);
+             return Ok(new {Message="Admin Logged in Successfully!", Token=admin.Token});
+        }
+        else return NotFound();
+    }
     
     [HttpPost("userRegister")]
      public async Task<IActionResult> saveUser([FromBody] User userObj){
@@ -56,6 +58,71 @@ namespace WebApp.Controller{
         await _authContext.SaveChangesAsync();
         return Ok(new{Message = "Admin Registered :)"});
      }
+        [HttpPost("sendEmail")]
+        public async Task<ActionResult<User>> SendEmail([FromBody] User obj)
+        {
+            if (obj == null) return BadRequest(new { Message = "user is null" });
+            if (await CheckEmailExistUser(obj.email)) return BadRequest(new { Message = "Eamil Already Exist!!! " });
+            if (await CheckEmailExistAdmin(obj.email)) return BadRequest(new { Message = "Eamil Already Exist!!! " });
+            try
+            {
+                MimeMessage message = new MimeMessage();
+                message.From.Add(new MailboxAddress("Chess Academy", "chessacademyofficial@gmail.com"));
+                message.To.Add(new MailboxAddress(obj.username, obj.email));
+                message.Subject = "Registered Successfully";
+                var bodyBuilder = new BodyBuilder();
+                bodyBuilder.HtmlBody = $@"
+                   <h2>Hey {obj.username}, Welcome to Chess Academy!</h2>
+                     <p>Congratulations! You have successfully registered for the Chess Academy portal.</p>
+                     <p>Your login credentials are:</p>
+                     <ul>
+                        <li><strong>Email:</strong> {obj.email}</li>
+                        <li><strong>Password:</strong> {obj.password}</li>
+                    </ul>
+                    <p>Enjoy your learning experience with Chess Academy!</p>";
+                message.Body = bodyBuilder.ToMessageBody();
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                    client.Authenticate("chessacademyofficial@gmail.com", "rgcainqdasbzhnfa");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                _authContext.Users.Add(obj);
+                await _authContext.SaveChangesAsync();
+                return Ok(obj);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("deleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var user = await _authContext.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            _authContext.Users.Remove(user);
+            await _authContext.SaveChangesAsync();
+            return NoContent();
+        }
+        [HttpDelete("deleteAdmin/{id}")]
+        public async Task<IActionResult> DeleteAdmin(int id)
+        {
+            var admin = await _authContext.Admins.FindAsync(id);
+            if (admin == null)
+            {
+                return NotFound();
+            }
+            _authContext.Admins.Remove(admin);
+            await _authContext.SaveChangesAsync();
+            return NoContent();
+        }
+
 
      private string createJwt(User user){
         var jwtTokenHandler = new JwtSecurityTokenHandler();

@@ -33,3 +33,7 @@
   p,a,h5{
       color: var(--secondary);
   }
+  ngb-rating{
+    color: #ffc107;
+    font-size: 30px;
+  }

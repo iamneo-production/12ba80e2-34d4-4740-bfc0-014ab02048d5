@@ -14,7 +14,6 @@ import {
   styleUrls: ['./viewcourses.component.css'],
 })
 export class ViewcoursesComponent {
-  searchInInput = '';
   faSearch = faSearch;
   faPenToSquare = faPenSquare;
   faTrashCan = faTrash;
@@ -34,7 +33,12 @@ export class ViewcoursesComponent {
       }
     });
     this.academy.getAcademyById(this.Instituteid).subscribe(res=>{
-      this.academyname=res.name;
+      this.academyname=res.instituteName;
     })
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

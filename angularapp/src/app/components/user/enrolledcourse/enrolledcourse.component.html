@@ -10,13 +10,15 @@
     type="text"
     class="form-control"
     placeholder="Search the course by name..."
-    [(ngModel)]="searchInInput"
+    [(ngModel)]="inputvalue"
   />
+  <button id="searchCourse" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
 </div>
 <div id="course">
   <ng-container *ngFor="let enrolledstudentdata of EnrolledStudentData">
     <ng-container *ngFor="let academy of academies">
-    <ng-container *ngFor="let course of courses | filter : searchInInput">
+    <ng-container *ngFor="let course of courses | filter : searchInInput : 'courseName'">
       <div
         class="card"
         *ngIf="

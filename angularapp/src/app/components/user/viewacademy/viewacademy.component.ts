@@ -15,8 +15,6 @@ export class ViewacademyComponent implements OnInit {
   faTrashCan=faTrash;
   faPlus=faSquare;
   faChessBishop=faChessBishop;
-  searchInInput= '';
-  
   constructor(private auth: AuthService,private academy:AcademyService){}
   userID:string;
   academies:any=[];
@@ -28,6 +26,11 @@ export class ViewacademyComponent implements OnInit {
        }
       })
      
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }
 

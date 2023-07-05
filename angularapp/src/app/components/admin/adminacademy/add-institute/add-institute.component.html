@@ -27,8 +27,9 @@
           addAcademyForm.get('instituteName').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your Academy Name !</p>
+       
+        <p *ngIf="addAcademyForm.get('instituteName').errors.required"> <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your Academy Name !</p>
+        <p *ngIf="addAcademyForm.get('instituteName').errors.pattern"> <fa-icon [icon]="faTriangleExclamation"></fa-icon> Special characters are not alllowed !</p>
       </div>
     </div>
     <div class="col">
@@ -54,8 +55,9 @@
           addAcademyForm.get('mobile').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy contact number !</p>
+        
+        <p  *ngIf="addAcademyForm.get('mobile').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your academy contact number !</p>
+        <p  *ngIf="addAcademyForm.get('mobile').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Incorrect format !</p>
       </div>
     </div>
   </div>
