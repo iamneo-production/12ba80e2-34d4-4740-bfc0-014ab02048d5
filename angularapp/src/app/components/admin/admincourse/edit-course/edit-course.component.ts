@@ -44,10 +44,11 @@ export class EditCourseComponent implements OnInit {
     this.updateCourseForm = new FormGroup({
       courseId: new FormControl(null),
       instituteID: new FormControl(null),
-      courseName: new FormControl(null, [Validators.required]),
-      studentenrolled: new FormControl(null, [Validators.required]),
+      courseName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
+      studentenrolled: new FormControl(null, [Validators.required,Validators.pattern(/^[0-9]+$/)]),
       courseDuration: new FormControl(null, [Validators.required]),
-      timing: new FormControl(null, [Validators.required]),
+      startTime: new FormControl(null, [Validators.required]),
+      endTime: new FormControl(null, [Validators.required]),
       courseDescription: new FormControl(null, [Validators.required]),
     });
 
@@ -59,11 +60,13 @@ export class EditCourseComponent implements OnInit {
         this.updateCourseForm.get('courseName').setValue(res.courseName);
         this.updateCourseForm.get('studentenrolled').setValue(res.studentenrolled);
         this.updateCourseForm.get('courseDuration').setValue(res.courseDuration);
-        this.updateCourseForm.get('timing').setValue(res.timing);
+        this.updateCourseForm.get('startTime').setValue(res.startTime);
+        this.updateCourseForm.get('endTime').setValue(res.endTime);
         this.updateCourseForm.get('courseDescription').setValue(res.courseDescription);
       });
   }
   onUpdateCourse() {
+    if(this.updateCourseForm.valid){
     this.academy
       .updateCourse(
         this.activeRouter.snapshot.params['id'],
@@ -75,5 +78,8 @@ export class EditCourseComponent implements OnInit {
           `admin/viewCourse/${this.updateCourseForm.get('instituteID').value}`,
         ]);
       });
+  }else{
+    this.toaster.error('Invalid details','Error',{timeOut:3000});
   }
+}
 }

@@ -1,136 +1,95 @@
 <app-admin-navbar></app-admin-navbar>
 <p class="text-center fw-bolder fs-2 p-2 my-2" style="background-color: var(--accent);">Update Course</p>
 <form class="p-4" [formGroup]="updateCourseForm">
-    <div class="row p-3">
-      <div class="col">
-        <div class="input-group mb-3">
-          <span class="input-group-text"
-            ><fa-icon [icon]="faUser"></fa-icon
-          ></span>
-          <div class="form-floating">
-            <input
-              id="editCourseName"
-              type="text"
-              class="form-control"
-              placeholder="academyname"
-              formControlName="courseName"
-            />
-            <label class="form-label">Course Name</label>
-          </div>
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+        <div class="form-floating">
+          <input id="editCourseName" type="text" class="form-control" placeholder="academyname"
+            formControlName="courseName" />
+          <label class="form-label">Course Name</label>
         </div>
-        <div
-          class="error"
-          *ngIf="updateCourseForm.get('courseName').errors && updateCourseForm.get('courseName').touched"
-        >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter your Course Name !</p>
-        </div>
-        </div>
-        <div class="col">
-        <div class=" input-group mb-3">
-          <span class="input-group-text"
-            ><fa-icon [icon]="faUser"></fa-icon
-          ></span>
-          <div class="form-floating">
-            <input
-            id="editCourseEnrolled"
-              type="text"
-              class="form-control"
-              placeholder="academycontact"
-              formControlName="studentenrolled"
-            />
-            <label class="form-label">Student Enrolled</label>
-          </div>
-        </div>
-        <div
-          class="error"
-          *ngIf="updateCourseForm.get('studentenrolled').errors && updateCourseForm.get('studentenrolled').touched"
-        >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter number of students enrolled !</p>
-        </div>
-        </div>
-</div>
-      <div class="row p-3">
-        <div class="col">
-          <div class="input-group mb-3">
-            <span class="input-group-text"
-              ><fa-icon [icon]="faUser"></fa-icon
-            ></span>
-            <div class="form-floating">
-              <input
-              id="editCourseDuration"
-                type="text"
-                class="form-control"
-                placeholder="academyame"
-                formControlName="courseDuration"
-              />
-              <label class="form-label">Course Duration</label>
-            </div>
-          </div>
-          <div
-            class="error"
-            *ngIf="updateCourseForm.get('courseDuration').errors && updateCourseForm.get('courseDuration').touched"
-          >
-            <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-            <p>Please enter your course duration !</p>
-          </div>
-          </div>
-          <div class="col">
-            <div class="input-group mb-3">
-              <span class="input-group-text"
-                ><fa-icon [icon]="faUser"></fa-icon
-              ></span>
-              <div class="form-floating">
-                <input
-                id="editCourseTiming"
-                  type="text"
-                  class="form-control"
-                  placeholder="academyame"
-                  formControlName="timing"
-                />
-                <label class="form-label">Course Timing</label>
-              </div>
-            </div>
-            <div
-              class="error"
-              *ngIf="updateCourseForm.get('timing').errors && updateCourseForm.get('timing').touched"
-            >
-              <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-              <p>Please enter your course timing !</p>
-            </div>
-            </div>
       </div>
-      <div class="row p-3">
-        <div class="col">
-        <div class="input-group mb-3">
-          <span class="input-group-text"
-            ><fa-icon [icon]="faBook"></fa-icon
-          ></span>
-          <div class="form-floating">
-            <textarea
-            id="editCourseDescription"
-              type="text"
-              class="form-control"
-              placeholder="academydescription"
-              formControlName="courseDescription"
-              style="height: 150px"
-            ></textarea>
-            <label class="form-label">Description</label>
-          </div>
-        </div>
-        <div
-          class="error"
-          *ngIf="updateCourseForm.get('courseDescription').errors && updateCourseForm.get('courseDescription').touched"
-        >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter your academy description !</p>
-        </div>
-        </div>
-        </div>
-      <div >
-        <button id="updateCourse" (click)="onUpdateCourse()" class="btn addcourse">
-          Update Course <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
-        </button>
+      <div class="error"
+        *ngIf="updateCourseForm.get('courseName').errors && updateCourseForm.get('courseName').touched">
+
+        <p *ngIf="updateCourseForm.get('courseName').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          Please enter your Course Name !</p>
+        <p *ngIf="updateCourseForm.get('courseName').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          Special characters are not allowed !</p>
+      </div>
     </div>
-  </form>
+    <div class="col">
+      <div class=" input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+        <div class="form-floating">
+          <input id="editCourseEnrolled" type="text" class="form-control" placeholder="academycontact"
+            formControlName="studentenrolled" />
+          <label class="form-label">Student Enrolled</label>
+        </div>
+      </div>
+      <div class="error"
+        *ngIf="updateCourseForm.get('studentenrolled').errors && updateCourseForm.get('studentenrolled').touched">
+
+        <p *ngIf="updateCourseForm.get('studentenrolled').errors.required"><fa-icon
+            [icon]="faTriangleExclamation"></fa-icon> Please enter number of students enrolled !</p>
+        <p *ngIf="updateCourseForm.get('studentenrolled').errors.pattern"><fa-icon
+            [icon]="faTriangleExclamation"></fa-icon> Alphabets and special characters are not allowed !</p>
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+        <div class="form-floating">
+          <input id="editCourseDuration" type="text" class="form-control" placeholder="academyame"
+            formControlName="courseDuration" />
+          <label class="form-label">Course Duration</label>
+        </div>
+      </div>
+      <div class="error"
+        *ngIf="updateCourseForm.get('courseDuration').errors && updateCourseForm.get('courseDuration').touched">
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your course duration !</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+        <div class="form-floating">
+          <input id="editCourseTiming" type="text" class="form-control" placeholder="academyame"
+            formControlName="timing" />
+          <label class="form-label">Course Timing</label>
+        </div>
+      </div>
+      <div class="error" *ngIf="updateCourseForm.get('timing').errors && updateCourseForm.get('timing').touched">
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your course timing !</p>
+      </div>
+    </div>
+  </div>
+  <div class="row p-3">
+    <div class="col">
+      <div class="input-group mb-3">
+        <span class="input-group-text"><fa-icon [icon]="faBook"></fa-icon></span>
+        <div class="form-floating">
+          <textarea id="editCourseDescription" type="text" class="form-control" placeholder="academydescription"
+            formControlName="courseDescription" style="height: 150px"></textarea>
+          <label class="form-label">Description</label>
+        </div>
+      </div>
+      <div class="error"
+        *ngIf="updateCourseForm.get('courseDescription').errors && updateCourseForm.get('courseDescription').touched">
+        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        <p>Please enter your academy description !</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button id="updateCourse" (click)="onUpdateCourse()" class="btn addcourse">
+      Update Course <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
+    </button>
+  </div>
+</form>

@@ -59,14 +59,14 @@ export class AddAdmissionComponent implements OnInit {
     this.addStudentForm = new FormGroup({
       courseID: new FormControl(null),
       userID: new FormControl(null),
-      firstname: new FormControl(null, [Validators.required]),
-      lastname: new FormControl(null, [Validators.required]),
+      firstname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      lastname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       gender: new FormControl(null, [Validators.required]),
-      fathername: new FormControl(null, [Validators.required]),
-      phonenumber: new FormControl(null, [Validators.required]),
-      alternatenumber: new FormControl(null, [Validators.required]),
-      mothername: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      fathername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      phonenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
+      alternatenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
+      mothername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      email: new FormControl(null, [Validators.required,Validators.email]),
       age: new FormControl(null, [Validators.required]),
       housenumber: new FormControl(null, [Validators.required]),
       street: new FormControl(null, [Validators.required]),
@@ -116,7 +116,7 @@ export class AddAdmissionComponent implements OnInit {
       });
       this.router.navigate(['/user/login']);
     } else {
-      this.toaster.error('FAILURE', 'Something went wrong', { timeOut: 3000 });
+      this.addStudentForm.markAllAsTouched();
     }
   }
 }

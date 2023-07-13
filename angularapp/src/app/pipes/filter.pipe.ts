@@ -11,7 +11,7 @@ export class FilterPipe implements PipeTransform {
     for(let i=0;i<value.length;i++){
       let name:string=value[i][nameValue];
       name=name.toLowerCase();
-      if(name.startsWith(sName)){
+      if(name.includes(sName)){
        array.push(value[i]);
       }
     }

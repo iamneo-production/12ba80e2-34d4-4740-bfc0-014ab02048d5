@@ -85,7 +85,7 @@ export class EditInstituteComponent implements OnInit {
           });
         });
     } else {
-      this.toaster.error('Error', 'Something went wrong', { timeOut: 2000 });
+      this.updateAcademyForm.markAllAsTouched();
     }
   }
 }

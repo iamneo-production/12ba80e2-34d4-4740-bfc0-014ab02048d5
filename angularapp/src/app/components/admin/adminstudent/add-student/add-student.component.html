@@ -16,11 +16,11 @@
             signupForm.get('email').errors && signupForm.get('email').touched
           ">
           <p *ngIf="signupForm.get('email').errors.required">
-            <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
+             Please enter your
             email !
           </p>
           <p *ngIf="signupForm.get('email').errors.email">
-            <fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is
+             Email format is
             incorrect !
           </p>
         </div>
@@ -39,9 +39,9 @@
             signupForm.get('username').touched
           ">
 
-          <p *ngIf="signupForm.get('username').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p *ngIf="signupForm.get('username').errors.required">
             Please enter your username !</p>
-          <p *ngIf="signupForm.get('username').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          <p *ngIf="signupForm.get('username').errors.pattern">
             Special Characters and numbers are not allowed!</p>
         </div>
       </div>
@@ -60,11 +60,11 @@
         signupForm.get('mobileNumber').touched
       ">
       <p *ngIf="signupForm.get('mobileNumber').errors.required">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
+         Please enter your
         mobilenumber !
       </p>
       <p *ngIf="signupForm.get('mobileNumber').errors.pattern">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Mobile Number format
+         Mobile Number format
         is incorrect
       </p>
     </div>
@@ -83,11 +83,11 @@
         signupForm.get('password').errors && signupForm.get('password').touched
       ">
       <p class="error" *ngIf="signupForm.get('password').errors.required">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
+         Please enter your
         password !
       </p>
       <p class="error" *ngIf="signupForm.get('password').errors.minlength">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Password length is
+         Password length is
         too short !
       </p>
     </div>
@@ -108,14 +108,14 @@
           signupForm.get('confirmPassword').errors &&
           signupForm.get('confirmPassword').touched
         ">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         Please re-enter your password !
       </p>
       <p class="error" *ngIf="
           password != confirmPassword &&
           signupForm.get('confirmPassword').touched
         ">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         Password not matched
       </p>
     </div>

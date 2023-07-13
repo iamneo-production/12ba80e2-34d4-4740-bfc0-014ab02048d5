@@ -55,23 +55,22 @@ export class AddStudentComponent implements OnInit {
       userRole: new FormControl('user'),
       mobileNumber: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^\d{10}$/),
+        Validators.pattern(/^(?:\+91|0)?[6789]\d{9}$/),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
     });
-
   }
 
   onAddStudent() {
     if (this.signupForm.valid) {
         this.auth.userRegisterSendEmail(this.signupForm.value).subscribe({next:(res)=>{
-          this.toaster.success('Student added successfully',res.Message,{timeOut:3000});
+          this.notif.success('Student added successfully',res.Message,{timeOut:3000});
         },error:(err)=>{
-          this.toaster.error('Error',err.Message,{timeOut:3000});
+          this.notif.error('Error',err.Message,{timeOut:3000});
         }})
     }
     else{
-      this.notif.error('Error', 'Form is not valid', { timeOut: 3000 });
+      this.signupForm.markAllAsTouched();
     }
   }
   toggle() {

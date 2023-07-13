@@ -1,4 +1,26 @@
-<app-admin-navbar></app-admin-navbar>
+<app-admin-navbar></app-admin-navbar> 
+<div class="container p-2 my-2">
+  <div class="row gap-5 align-center">
+    <div class="col justify-content-center text wrap">
+      <p class="fw-bolder text-start" style="font-size: 40px;">
+        Hi {{adminName}}, Welcome to our Chess Academy Portal <br> <span style="color: var(--accent);">ADMIN PANEL</span> 
+      </p>
+      <p class="fw-light" style="text-align: justify;">
+        At our Chess Academy, we believe that chess is more than just a game. It
+        is a timeless art form that combines intellect, strategy, creativity,
+        and resilience. Whether you are a beginner taking your first steps on
+        the 64 squares or a seasoned player seeking to refine your skills, our
+        portal is designed to cater to your specific needs and aspirations. It is a timeless art form that combines
+        intellect, strategy, creativity, and resilience. Whether you are a beginner taking your first steps on the 64
+        squares or a seasoned player seeking to refine your skills, our portal is designed to cater to your specific
+        needs and aspirations.
+      </p>
+    </div>
+    <div class="col m-2">
+      <img class="img-fluid w-100" src="../../../../assets/admin-header-img.png" alt="" />
+    </div>
+  </div>
+</div>
 <div class="input-group w-50 mx-auto mt-4" id="search-bar">
   <input
     type="text"
@@ -14,7 +36,7 @@
   Add new academy <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
 </button>
 <p class="text-center fw-bolder fs-3 allacademies">All Academies</p>
-<div class="container-fluid cards">
+<div class="container-fluid cards" id="allAcademy">
   <div class="row">
     <div
       class="col-lg-4 mb-4"

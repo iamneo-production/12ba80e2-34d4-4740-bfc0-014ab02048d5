@@ -1,133 +1,149 @@
-<p class="h1 fs-1 text-center p-4 fw-bolder" style="background-color: var(--accent); color:var(--primary)">CHESS ACADEMY PORTAL</p>
-  <form [formGroup]="signupForm">
-    <p id="welcome" class="p-2 text-center fs-3">
-      Create your account<fa-icon class="fs-1 ms-2" [icon]="faChessKing"></fa-icon>
-    </p>
-    <select class="form-select mb-2" formControlName="userRole" aria-label="Default select example">
-      <option value="admin" id="admin">Admin</option>
-      <option value="user" id="user">User</option>
-    </select>
-    <div class="row">
-      <div class="col">
-        <div class="input-group mb-3">
-          <span class="input-group-text"><fa-icon [icon]="faEnvelope"></fa-icon>
-          </span>
-          <div class="form-floating">
-            <input id="email" type="email" class="form-control" placeholder="Email" formControlName="email" />
-            <label class="form-label">Email</label>
-          </div>
-        </div>
-        <div class="error" *ngIf="
-            signupForm.get('email').errors && signupForm.get('email').touched
-          ">
-          <p *ngIf="signupForm.get('email').errors.required">
-            <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
-            email !
-          </p>
-          <p *ngIf="signupForm.get('email').errors.email">
-            <fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is
-            incorrect !
-          </p>
-        </div>
-      </div>
-      <div class="col">
-        <div class="input-group mb-3">
-          <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon>
-          </span>
-          <div class="form-floating">
-            <input id="username" type="text" class="form-control" placeholder="Username" formControlName="username" />
-            <label class="form-label">Username</label>
-          </div>
-        </div>
-        <div class="error" *ngIf="
-            signupForm.get('username').errors &&
-            signupForm.get('username').touched
-          ">
+<section class="vh-100" style="background-color: #ffffff;">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-          <p *ngIf="signupForm.get('username').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
-            Please enter your username !</p>
-          <p *ngIf="signupForm.get('username').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon>
-            Special Characters and numbers are not allowed!</p>
-        </div>
-      </div>
-    </div>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-    <div class="input-group mb-3">
-      <span class="input-group-text"><fa-icon [icon]="faMobile"></fa-icon></span>
-      <div class="form-floating">
-        <input id="mobileNumber" type="text" class="form-control" placeholder="mobilenumber"
-          formControlName="mobileNumber" />
-        <label class="form-label">Phone number</label>
-      </div>
-    </div>
-    <div class="error" *ngIf="
-        signupForm.get('mobileNumber').errors &&
-        signupForm.get('mobileNumber').touched
-      ">
-      <p *ngIf="signupForm.get('mobileNumber').errors.required">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
-        mobilenumber !
-      </p>
-      <p *ngIf="signupForm.get('mobileNumber').errors.pattern">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Mobile Number format
-        is incorrect
-      </p>
-    </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text"><fa-icon [icon]="faLock"></fa-icon></span>
-      <div class="form-floating">
-        <input type="{{ passType }}" class="form-control" id="password" placeholder="Password"
-          formControlName="password" [(ngModel)]="password" />
-        <span class="password-toggle-icon" (click)="toggle()" *ngIf="!showPass"><fa-icon
-            [icon]="faEyeSlash"></fa-icon></span>
-        <span class="password-toggle-icon" (click)="toggle()" *ngIf="showPass"><fa-icon [icon]="faEye"></fa-icon></span>
-        <label for="password" class="form-label">Password</label>
-      </div>
-    </div>
-    <div class="error" *ngIf="
+                <form [formGroup]="signupForm" class="mx-1 mx-md-4">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example1c">Role</label>
+                      <select class="form-control" formControlName="userRole">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                      <div *ngIf="signupForm.get('userRole').errors && signupForm.get('userRole').touched"
+                        class="text-danger">
+                        <div *ngIf="signupForm.get('userRole').errors.required">Role is required</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example1c">Email</label>
+                      <input type="text" id="form3Example1c" formControlName="email" class="form-control" />
+                      <div *ngIf="signupForm.get('email').errors && (signupForm.get('email').touched)"
+                        class="text-danger">
+                        <div *ngIf="signupForm.get('email').errors.required">Email is required</div>
+                        <div *ngIf="signupForm.get('email').errors.email">Please Enter a Valid Email</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example1c">Username</label>
+                      <input type="text" id="form3Example1c" formControlName="username" class="form-control" />
+                      <div *ngIf="signupForm.get('username')?.errors && (signupForm.get('username')?.touched)"
+                        class="text-danger">
+                        <div *ngIf="signupForm.get('username').errors.required">Username is required</div>
+                        <div
+                          *ngIf="signupForm.get('username').hasError('minlength') && !(signupForm.get('username').hasError('pattern'))">
+                          Username should contain more than
+                          6 characters</div>
+                        <div *ngIf="signupForm.get('username').hasError('pattern')">Username should be Alphanumeric
+                          characters</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example3c">Mobile Number</label>
+                      <input type="email" id="form3Example3c" formControlName="mobileNumber" class="form-control" />
+                      <div *ngIf="signupForm.get('mobileNumber').errors && (signupForm.get('mobileNumber').touched)"
+                        class="text-danger">
+                        <div *ngIf="signupForm.get('mobileNumber').errors.required">Mobile Number is required</div>
+                        <div
+                          *ngIf="signupForm.get('mobileNumber').errors.invalidMobileNumber && !(signupForm.get('mobileNumber').errors.required)">
+                          Please Enter a Valid Mobile Number</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4c">Password</label>
+                      <input type="{{ passType }}" class="form-control" id="password"
+                        formControlName="password" [(ngModel)]="password" />
+                      <span class="password-toggle-icon" (click)="toggle()" *ngIf="!showPass"><fa-icon
+                          [icon]="faEyeSlash"></fa-icon></span>
+                      <span class="password-toggle-icon" (click)="toggle()" *ngIf="showPass"><fa-icon
+                          [icon]="faEye"></fa-icon></span>
+                      <div class="text-danger" *ngIf="
         signupForm.get('password').errors && signupForm.get('password').touched
       ">
-      <p class="error" *ngIf="signupForm.get('password').errors.required">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
-        password !
-      </p>
-      <p class="error" *ngIf="signupForm.get('password').errors.minlength">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon> Password length is
-        too short !
-      </p>
-    </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text"><fa-icon [icon]="faLock"></fa-icon></span>
-      <div class="form-floating">
-        <input type="{{ confirmPassType }}" class="form-control" id="confirmPassword" placeholder="confirmPassword"
-          formControlName="confirmPassword" [(ngModel)]="confirmPassword" />
-        <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="!showConfirmPass"><fa-icon
-            [icon]="faEyeSlash"></fa-icon></span>
-        <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="showConfirmPass"><fa-icon
-            [icon]="faEye"></fa-icon></span>
-        <label for="confirmPassword" class="form-label">Confirm password</label>
+                        <p class="text-danger" *ngIf="signupForm.get('password').errors.required">
+                           Password is required
+                        </p>
+                        <p class="text-danger" *ngIf="signupForm.get('password').errors.pattern">
+                          The password must be at least 8 characters long and include at least one special character, one uppercase letter, and one lowercase letter.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4cd">Confirm Password</label>
+                      <input type="{{ confirmPassType }}" class="form-control" id="confirmPassword"
+                         formControlName="confirmPassword" [(ngModel)]="confirmPassword" />
+                      <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="!showConfirmPass"><fa-icon
+                          [icon]="faEyeSlash"></fa-icon></span>
+                      <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="showConfirmPass"><fa-icon
+                          [icon]="faEye"></fa-icon></span>
+                      <div class="text-danger">
+                        <p class="text-danger" *ngIf="
+                                signupForm.get('confirmPassword').errors &&
+                                signupForm.get('confirmPassword').touched
+                              ">
+                          
+                          Please re-enter your password !
+                        </p>
+                        <p class="text-danger" *ngIf="
+                                password != confirmPassword &&
+                                signupForm.get('confirmPassword').touched && !signupForm.get('confirmPassword').errors
+                              ">
+                          
+                          Password not matched
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button (click)="onSignup()" type="button"
+                      class="btn btn-secondary-black btn-lg gradient-custom-2 ">Register</button>
+                  </div>
+                  <div class="text-center mt-3">
+                    <p>Already have an account?
+                    <a (click)="loginButton()" id="signupLink" style="cursor: pointer; color: var(--accent); text-decoration:underline;">Sign up</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/018/871/720/original/king-and-soldier-chess-pieces-on-transparent-background-leadership-concept-png.png"
+                  class="img-fluid images" style="width:600px; height:600px" alt="logo">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="error">
-      <p class="error" *ngIf="
-          signupForm.get('confirmPassword').errors &&
-          signupForm.get('confirmPassword').touched
-        ">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        Please re-enter your password !
-      </p>
-      <p class="error" *ngIf="
-          password != confirmPassword &&
-          signupForm.get('confirmPassword').touched
-        ">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        Password not matched
-      </p>
-    </div>
-    <button type="submit" id="submitButton" (click)="onSignup()" class="btn w-100">
-      Sign Up
-    </button>
-    <p class="mt-3">
-      Already a user/admin? <a (click)="loginButton()" id="signinLink">Login</a>
-    </p>
-  </form>
+  </div>
+</section>

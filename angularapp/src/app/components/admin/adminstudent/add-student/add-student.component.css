@@ -18,12 +18,8 @@ form {
   font-size: 15px;
   margin-left: 5px;
 }
-.error fa-icon {
-  color: rgb(255, 75, 4);
-  font-size: 18px;
-}
 .error p {
-  color: rgb(255, 79, 4);
+  color: red;
   margin-top: 0.2px;
 }
 #submitButton {

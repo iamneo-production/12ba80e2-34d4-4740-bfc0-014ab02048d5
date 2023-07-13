@@ -12,4 +12,5 @@ export class AdminNavbarComponent {
   logout(){
     this.auth.signout();
   }
+ 
 }

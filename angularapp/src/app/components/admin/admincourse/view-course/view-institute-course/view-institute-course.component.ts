@@ -48,6 +48,7 @@ export class ViewInstituteCourseComponent implements OnInit {
       });
     });
   }
+  
   inputvalue= '';
   searchInInput = '';
   onSearch(){

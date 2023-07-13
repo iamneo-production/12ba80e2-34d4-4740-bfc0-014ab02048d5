@@ -28,8 +28,8 @@
         "
       >
        
-        <p *ngIf="addAcademyForm.get('instituteName').errors.required"> <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your Academy Name !</p>
-        <p *ngIf="addAcademyForm.get('instituteName').errors.pattern"> <fa-icon [icon]="faTriangleExclamation"></fa-icon> Special characters are not alllowed !</p>
+        <p *ngIf="addAcademyForm.get('instituteName').errors.required"> Please enter your Academy Name !</p>
+        <p *ngIf="addAcademyForm.get('instituteName').errors.pattern"> Special characters are not alllowed !</p>
       </div>
     </div>
     <div class="col">
@@ -56,8 +56,8 @@
         "
       >
         
-        <p  *ngIf="addAcademyForm.get('mobile').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your academy contact number !</p>
-        <p  *ngIf="addAcademyForm.get('mobile').errors.pattern"><fa-icon [icon]="faTriangleExclamation"></fa-icon> Incorrect format !</p>
+        <p  *ngIf="addAcademyForm.get('mobile').errors.required"> Please enter your academy contact number !</p>
+        <p  *ngIf="addAcademyForm.get('mobile').errors.pattern"> Incorrect format !</p>
       </div>
     </div>
   </div>
@@ -85,7 +85,7 @@
           addAcademyForm.get('image').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+      
         <p>Please enter your Image URL !</p>
       </div>
     </div>
@@ -113,11 +113,11 @@
         "
       >
         <p *ngIf="addAcademyForm.get('email').errors.required">
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
+         Please enter your
           academy email !
         </p>
         <p *ngIf="addAcademyForm.get('email').errors.email">
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is
+         Email format is
           incorrect!!!
         </p>
       </div>
@@ -147,7 +147,7 @@
           addAcademyForm.get('instituteAddress').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+      
         <p>Please enter your location !</p>
       </div>
     </div>
@@ -178,7 +178,7 @@
           addAcademyForm.get('instituteDescription').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+      
         <p>Please enter your academy description !</p>
       </div>
     </div>

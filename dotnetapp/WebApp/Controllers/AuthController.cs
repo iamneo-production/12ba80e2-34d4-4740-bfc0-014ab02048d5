@@ -178,5 +178,29 @@ namespace WebApp.Controller{
         {
             return Ok(await _authContext.Admins.ToListAsync());
         }
+        [HttpGet("GetAdmin/{id}")]
+        public async Task<ActionResult<Admin>> GetAdmin(int id)
+        {
+            var admin = await  _authContext.Admins.FindAsync(id);
+
+            if (admin == null)
+            {
+                return NotFound();
+            }
+
+            return admin;
+        }
+        [HttpGet("GetUser/{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await  _authContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
     }
 }

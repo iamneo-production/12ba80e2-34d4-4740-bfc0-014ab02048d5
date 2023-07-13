@@ -1,7 +1,7 @@
 <app-user-navbar></app-user-navbar>
-<p class="text-center fw-bolder fs-2 p-2 my-2" style="background-color: var(--accent);">Add Student</p>
+<p class="text-center fw-bolder fs-2 p-2 my-2" style="background-color: var(--accent);">Add Admission</p>
 <form class="p-4" [formGroup]="addStudentForm">
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -24,7 +24,7 @@
           addStudentForm.get('firstname').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your firstname !</p>
       </div>
     </div>
@@ -50,7 +50,7 @@
           addStudentForm.get('lastname').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your lastname !</p>
       </div>
     </div>
@@ -59,15 +59,11 @@
         <span class="input-group-text"
           ><fa-icon [icon]="faVenusMars"></fa-icon
         ></span>
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="gender"
-            formControlName="gender"
-          />
-          <label class="form-label">Gender</label>
-        </div>
+        <select class="form-select" aria-label="Default select example" formControlname="gender">
+          <option selected>Select your option</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
       </div>
       <div
         class="error"
@@ -76,13 +72,13 @@
           addStudentForm.get('gender').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your gender !</p>
       </div>
     </div>
   </div>
-  <div class="row p-3">
-    <div class="row p-3">
+  <div class="row">
+    <div class="row">
       <div class="col">
         <div class="input-group mb-3">
           <span class="input-group-text"
@@ -105,7 +101,7 @@
             addStudentForm.get('fathername').touched
           "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          
           <p>Please enter your fathername !</p>
         </div>
       </div>
@@ -131,7 +127,7 @@
             addStudentForm.get('phonenumber').touched
           "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          
           <p>Please enter your phonenumber !</p>
         </div>
       </div>
@@ -157,13 +153,13 @@
             addStudentForm.get('alternatenumber').touched
           "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+          
           <p>Please enter your alternatenumber !</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -186,7 +182,7 @@
           addStudentForm.get('mothername').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your mother name !</p>
       </div>
     </div>
@@ -212,7 +208,7 @@
           addStudentForm.get('email').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your email !</p>
       </div>
     </div>
@@ -238,13 +234,13 @@
           addStudentForm.get('age').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your age !</p>
       </div>
     </div>
   </div>
 <div class="additional-info"> <p class="fs-5 fst-italic ms-3">Some Additional Information</p>
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -261,13 +257,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('housenumber').errors &&
           addStudentForm.get('housenumber').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your house number !</p>
       </div>
     </div>
@@ -287,19 +283,19 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('street').errors &&
           addStudentForm.get('street').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your street address !</p>
       </div>
     </div>
   </div>
 
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -316,13 +312,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('area').errors &&
           addStudentForm.get('area').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your area !</p>
       </div>
     </div>
@@ -342,19 +338,19 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('passcode').errors &&
           addStudentForm.get('passcode').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your passcode !</p>
       </div>
     </div>
   </div>
 
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -371,13 +367,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('state').errors &&
           addStudentForm.get('state').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your state !</p>
       </div>
     </div>
@@ -397,13 +393,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           addStudentForm.get('nationality').errors &&
           addStudentForm.get('nationality').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your nationality !</p>
       </div>
     </div>

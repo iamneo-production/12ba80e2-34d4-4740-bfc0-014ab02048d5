@@ -16,27 +16,31 @@ export class AdminacademyComponent implements OnInit {
   faPlus=faSquare;
   faChessBishop=faChessBishop;
   adminAcademyGridNumber:number=0;
+  adminName:string;
   
   constructor(private toaster:ToastrService,private router:Router,private auth: AuthService,private academy:AcademyService,private activeRouter:ActivatedRoute){}
   role:string;
-  userID:string;
+  userID:number;
   academies:any=[];
   coursePK:number;
-  
   ngOnInit(){
       this.role=this.auth.getRole();
       this.userID=this.auth.getID();
+
       this.academy.getAcademy().subscribe((val)=>{
        for(let i=0;i<val.length;i++){
           this.academies.push(val[i]);
        }
+      })
+      this.auth.getAdminData(this.userID).subscribe((val)=>{
+          this.adminName=val.username;
       })
   }
 
   deleteAcademy(id:number){
     this.academy.deleteAcademy(id).subscribe(res=>{
       this.academy.deleteAcademyCourse(id).subscribe(res=>{
-        this.toaster.success('Academy & its courses deleted successfully','DELETED',{timeOut:3000})
+        this.toaster.warning('Academy & its courses deleted successfully','DELETED',{timeOut:3000})
       })
       location.reload();
     })

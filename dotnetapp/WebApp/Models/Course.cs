@@ -12,7 +12,8 @@ namespace WebApp.Models
         public int courseDuration { get; set; }
         public string courseDescription { get; set; }
         public string studentenrolled { get; set; }
-        public string timing { get; set; }
+        public string startTime { get; set; }
+        public string endTime { get; set; }
         
     }
 }
