@@ -18,14 +18,18 @@
         </div>
       </div>
       <div
-        class="error"
-        *ngIf="
-          addStudentForm.get('firstname').errors &&
-          addStudentForm.get('firstname').touched
-        "
+        class="error" *ngIf="
+        addStudentForm.get('firstname').errors &&
+        addStudentForm.get('firstname').touched
+      "
       >
         
-        <p>Please enter your firstname !</p>
+        <p  *ngIf="
+        addStudentForm.get('firstname').errors.required 
+      ">Please enter your firstname !</p>
+      <p  *ngIf="
+        addStudentForm.get('firstname').errors.pattern 
+      ">Special characters and numbers are not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -43,15 +47,16 @@
           <label class="form-label">Lastname</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          addStudentForm.get('lastname').errors &&
-          addStudentForm.get('lastname').touched
-        "
-      >
-        
-        <p>Please enter your lastname !</p>
+      <div class="error" *ngIf="
+      addStudentForm.get('lastname').errors &&
+      addStudentForm.get('lastname').touched
+    ">
+        <p *ngIf="
+        addStudentForm.get('lastname').errors.required 
+      ">Please enter your lastname !</p>
+      <p *ngIf="
+        addStudentForm.get('lastname').errors.pattern
+      ">Special characters and numbers are not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -59,21 +64,14 @@
         <span class="input-group-text"
           ><fa-icon [icon]="faVenusMars"></fa-icon
         ></span>
-        <select class="form-select" aria-label="Default select example" formControlname="gender">
-          <option selected>Select your option</option>
+        <select formControlName="gender" id="gender" class="form-control">
+          <option value="" disabled selected>Select gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          addStudentForm.get('gender').errors &&
-          addStudentForm.get('gender').touched
-        "
-      >
-        
-        <p>Please enter your gender !</p>
+      <div style="color: red;"*ngIf="addStudentForm.get('gender').touched && addStudentForm.get('gender').errors" >
+        Select your gender !
       </div>
     </div>
   </div>
@@ -97,12 +95,17 @@
         <div
           class="error"
           *ngIf="
-            addStudentForm.get('fathername').errors &&
-            addStudentForm.get('fathername').touched
-          "
+          addStudentForm.get('fathername').errors &&
+          addStudentForm.get('fathername').touched
+        "
         >
           
-          <p>Please enter your fathername !</p>
+          <p   *ngIf="
+          addStudentForm.get('fathername').errors.required 
+        ">Please enter your fathername !</p>
+        <p *ngIf="
+          addStudentForm.get('fathername').errors.pattern 
+        ">Special characters and numbers are not allowed !</p>
         </div>
       </div>
       <div class="col">
@@ -117,18 +120,23 @@
               placeholder="phonenumber"
               formControlName="phonenumber"
             />
-            <label class="form-label">Phone Number</label>
+            <label class="form-label">Mobile Number</label>
           </div>
         </div>
         <div
           class="error"
           *ngIf="
-            addStudentForm.get('phonenumber').errors &&
-            addStudentForm.get('phonenumber').touched
-          "
+          addStudentForm.get('phonenumber').errors &&
+          addStudentForm.get('phonenumber').touched
+        "
         >
           
-          <p>Please enter your phonenumber !</p>
+          <p  *ngIf="
+          addStudentForm.get('phonenumber').errors.required 
+        ">Please enter your Mobile Number !</p>
+        <p  *ngIf="
+          addStudentForm.get('phonenumber').errors.pattern 
+        ">Mobile number format is not correct !</p>
         </div>
       </div>
       <div class="col">
@@ -143,18 +151,23 @@
               placeholder="alternatenumberr"
               formControlName="alternatenumber"
             />
-            <label class="form-label">Alternate Phone Number</label>
+            <label class="form-label">Alternate Mobile Number</label>
           </div>
         </div>
         <div
           class="error"
           *ngIf="
-            addStudentForm.get('alternatenumber').errors &&
-            addStudentForm.get('alternatenumber').touched
-          "
+          addStudentForm.get('alternatenumber').errors &&
+          addStudentForm.get('alternatenumber').touched
+        "
         >
           
-          <p>Please enter your alternatenumber !</p>
+          <p *ngIf="
+          addStudentForm.get('alternatenumber').errors.required 
+        ">Please enter your alternate mobile number !</p>
+        <p *ngIf="
+          addStudentForm.get('alternatenumber').errors.pattern
+        ">Mobile number format is not correct !</p>
         </div>
       </div>
     </div>
@@ -178,12 +191,16 @@
       <div
         class="error"
         *ngIf="
-          addStudentForm.get('mothername').errors &&
-          addStudentForm.get('mothername').touched
-        "
+        addStudentForm.get('mothername').errors &&
+        addStudentForm.get('mothername').touched
+      "
       >
-        
-        <p>Please enter your mother name !</p>
+        <p  *ngIf="
+        addStudentForm.get('mothername').errors.required 
+      ">Please enter your mother name !</p>
+      <p  *ngIf="
+      addStudentForm.get('mothername').errors.pattern
+    ">Special characters is not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -204,12 +221,16 @@
       <div
         class="error"
         *ngIf="
-          addStudentForm.get('email').errors &&
-          addStudentForm.get('email').touched
-        "
+        addStudentForm.get('email').errors && addStudentForm.get('email').touched
+      "
       >
         
-        <p>Please enter your email !</p>
+        <p   *ngIf="
+        addStudentForm.get('email').errors.required
+      ">Please enter your email !</p>
+      <p   *ngIf="
+        addStudentForm.get('email').errors.email
+      ">Email format is not correct !</p>
       </div>
     </div>
     <div class="col">
@@ -227,15 +248,9 @@
           <label class="form-label">age</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          addStudentForm.get('age').errors &&
-          addStudentForm.get('age').touched
-        "
-      >
-        
-        <p>Please enter your age !</p>
+      <div class="error" *ngIf=" addStudentForm.get('age').errors && addStudentForm.get('age').touched">
+        <p *ngIf=" addStudentForm.get('age').errors.required ">Please enter your age !</p>
+        <p *ngIf=" addStudentForm.get('age').errors.pattern">Please enter a valid age !</p>
       </div>
     </div>
   </div>
@@ -340,12 +355,17 @@
       <div
         class="error1"
         *ngIf="
-          addStudentForm.get('passcode').errors &&
-          addStudentForm.get('passcode').touched
-        "
+        addStudentForm.get('passcode').errors &&
+        addStudentForm.get('passcode').touched
+      "
       >
         
-        <p>Please enter your passcode !</p>
+        <p  *ngIf="
+        addStudentForm.get('passcode').errors.required
+      ">Please enter your passcode !</p>
+      <p  *ngIf="
+      addStudentForm.get('passcode').errors.pattern
+    ">Please enter valid passcode !</p>
       </div>
     </div>
   </div>
@@ -374,7 +394,8 @@
         "
       >
         
-        <p>Please enter your state !</p>
+        <p *ngIf="addStudentForm.get('state').errors.required ">Please enter your state !</p>
+        <p *ngIf="addStudentForm.get('state').errors.pattern ">Please enter valid name of state !</p>
       </div>
     </div>
     <div class="col">
@@ -400,7 +421,8 @@
         "
       >
         
-        <p>Please enter your nationality !</p>
+        <p *ngIf="addStudentForm.get('nationality').errors.required">Please enter your nationality !</p>
+        <p *ngIf="addStudentForm.get('nationality').errors.pattern">Special characters and numbers are not allowed !</p>
       </div>
     </div>
   </div>
@@ -408,7 +430,7 @@
 
   <div class="">
     <button class="btn addstudent" (click)="onAddStudent()">
-      Add Student <fa-icon [icon]="faChessBishop"></fa-icon>
+      Add Admission <fa-icon [icon]="faChessBishop"></fa-icon>
     </button>
   </div>
 </form>

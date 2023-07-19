@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class AcademyService {
   AcademyURL =
-    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io/api/Admin';
+    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io';
   CourseURL =
-    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io/api/Admin';
+    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io';
   StudentURL =
-    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io/api/User';
+    'https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io';
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class AcademyService {
     return this.http.post<any>(`${this.AcademyURL}/PostInstitute`, data);
   }
   getAcademy() {
-    return this.http.get<any>(`${this.AcademyURL}/GetInstitute`);
+    return this.http.get<any>(`${this.AcademyURL}/admin/viewInstitutes`);
   }
   getAcademyById(id: number) {
     return this.http.get<any>(`${this.AcademyURL}/GetInstituteID/${id}`);

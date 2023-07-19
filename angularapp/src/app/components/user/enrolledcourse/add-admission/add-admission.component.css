@@ -20,7 +20,7 @@ form {
       margin-top: 0.2px;
     }
     .error1 p{
-      color: rgb(143, 10, 10);
+      color: white;
     }
     .additional-info{
         background-color: var(--accent);

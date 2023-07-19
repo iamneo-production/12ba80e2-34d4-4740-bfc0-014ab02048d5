@@ -12,7 +12,4 @@ export class UserFooterComponent {
   faIcons=faIcons;
   faChessKnight=faChessKnight;
   faArrowRight= faArrowRight;
-  redirectToNavbar(){
-    this.router.navigate(['/user-navbar']);
-  }
 }

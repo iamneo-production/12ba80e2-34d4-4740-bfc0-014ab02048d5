@@ -28,7 +28,9 @@ export class EnrolledcourseComponent implements OnInit{
   faChessBishop = faChessBishop;
   faSearch=faSearch;
   feedbackForm: FormGroup;
+  addCourseForm: FormGroup;
   instituteId;
+  reloadPage:boolean=false;
   ngOnInit(): void {
 
     this.feedbackForm = new FormGroup({
@@ -43,6 +45,16 @@ export class EnrolledcourseComponent implements OnInit{
       userGiveRating : new FormControl(null),
       averageRating: new FormControl(null),
     })
+    this.addCourseForm = new FormGroup({
+      courseId: new FormControl(null),
+      instituteID: new FormControl(null),
+      courseName: new FormControl(null),
+      studentenrolled: new FormControl(null),
+      courseDuration: new FormControl(null),
+      startTime: new FormControl (null),
+      endTime: new FormControl (null),
+      courseDescription: new FormControl(null)
+})
 
 
     this.loginID=this.auth.getID();
@@ -62,11 +74,22 @@ export class EnrolledcourseComponent implements OnInit{
       }
     })
   }
-  onDelete(id:number){
+  onDelete(id:number,courseId:number){
     this.academy.deleteStudent(id).subscribe(res=>{
+      this.academy.getCourse(courseId).subscribe(val=>{
+        this.addCourseForm.get('courseId').setValue(val.courseId);
+        this.addCourseForm.get('instituteID').setValue(val.instituteID);
+        this.addCourseForm.get('courseName').setValue(val.courseName);
+        this.addCourseForm.get('courseDuration').setValue(val.courseDuration);
+        this.addCourseForm.get('courseDescription').setValue(val.courseDescription);
+        this.addCourseForm.get('studentenrolled').setValue((Number(val.studentenrolled)+1).toString());
+        this.addCourseForm.get('startTime').setValue(val.startTime);
+        this.addCourseForm.get('endTime').setValue(val.endTime);
+        this.academy.updateCourse(courseId,this.addCourseForm.value).subscribe();
+        location.reload();
+      })  
       this.toaster.warning("Student deleted","Deleted",{timeOut:3000});
     })
-    location.reload();
   }
   fetchinstituteId(id){
     this.instituteId=id;

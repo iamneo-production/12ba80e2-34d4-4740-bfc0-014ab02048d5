@@ -19,13 +19,13 @@
       <div class="card-body">
         <div class="row row-cols-2 mx-3 my-2 fw-light">
           <div class="col">
-            <p class="card-text">Duration: {{ course.courseDuration }}</p>
+            <p class="card-text">Duration: {{ course.courseDuration }} months</p>
           </div>
           <div class="col text-end">
             <p class="card-text">Students: {{ course.studentenrolled }}</p>
           </div>
           <div class="col">
-            <p class="card-text">Timing: {{ course.timing }}</p>
+            <p class="card-text">Timing: {{ course.startTime }} to {{course.endTime}}</p>
           </div>
           <div class="col text-end">
             <p class="card-text">
@@ -40,9 +40,13 @@
               class="btn"
               id="enrollbutton"
               routerLink="/user/addAdmission/{{ course.courseId }}"
+              *ngIf="course.studentenrolled>0; else elseblock"
             >
               Enroll
             </button>
+            <ng-template #elseblock>
+              <p class="fs-5 text-danger fw-bold text-center">Seats for this course is already full.</p> 
+            </ng-template>
           </div>
         </div>
       </div>

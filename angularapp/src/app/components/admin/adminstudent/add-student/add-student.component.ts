@@ -49,7 +49,7 @@ export class AddStudentComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{8,}$/)
       ]),
       username: new FormControl(null,[Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       userRole: new FormControl('user'),

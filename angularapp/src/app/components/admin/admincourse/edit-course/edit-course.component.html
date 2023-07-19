@@ -44,9 +44,9 @@
       <div class="input-group mb-3">
         <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
         <div class="form-floating">
-          <input id="editCourseDuration" type="text" class="form-control" placeholder="academyame"
+          <input id="editCourseDuration" type="number" class="form-control" placeholder="academyame"
             formControlName="courseDuration" />
-          <label class="form-label">Course Duration</label>
+          <label class="form-label">Course Duration (months)</label>
         </div>
       </div>
       <div class="error"
@@ -54,21 +54,39 @@
         <fa-icon [icon]="faTriangleExclamation"></fa-icon>
         <p>Please enter your course duration !</p>
       </div>
-    </div>
+    </div>  
+  </div>
+  <div class="row p-2">
+    <p>Course Timing</p>
     <div class="col">
-      <div class="input-group mb-3">
-        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+      <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping"><fa-icon [icon]="faClock"></fa-icon></span>
         <div class="form-floating">
-          <input id="editCourseTiming" type="text" class="form-control" placeholder="academyame"
-            formControlName="timing" />
-          <label class="form-label">Course Timing</label>
+          <input type="time" class="form-control" id="floatingInput" formControlName="startTime"
+            placeholder="name@example.com">
+          <label for="floatingInput">Start Time</label>
         </div>
       </div>
-      <div class="error" *ngIf="updateCourseForm.get('timing').errors && updateCourseForm.get('timing').touched">
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your course timing !</p>
+      <div class="error" *ngIf="updateCourseForm.get('startTime').invalid && updateCourseForm.get('startTime').touched">
+        <p *ngIf="updateCourseForm.get('startTime').hasError('required')">Start time is required !</p>
       </div>
     </div>
+    <div class="col">
+      <div class="input-group flex-nowrap">
+        <span class="input-group-text" id="addon-wrapping"><fa-icon [icon]="faClock"></fa-icon></span>
+        <div class="form-floating">
+          <input type="time" class="form-control" id="floatingInput" formControlName="endTime"
+            placeholder="name@example.com">
+          <label for="floatingInput">End Time</label>
+        </div>
+      </div>
+      <div class="error" *ngIf="updateCourseForm.get('endTime').invalid && updateCourseForm.get('endTime').touched">
+        <p *ngIf="updateCourseForm.get('endTime').hasError('required')">End time is required !</p>
+      </div>
+    </div>
+    <p style="color: red;" *ngIf="updateCourseForm.errors && updateCourseForm.errors.maxTimeGapExceeded">
+      Course timing cannot exceed 4 hours !
+    </p>
   </div>
   <div class="row p-3">
     <div class="col">

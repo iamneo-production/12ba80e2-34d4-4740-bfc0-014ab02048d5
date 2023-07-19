@@ -79,18 +79,14 @@
         <label for="password" class="form-label">Password</label>
       </div>
     </div>
-    <div class="error" *ngIf="
-        signupForm.get('password').errors && signupForm.get('password').touched
-      ">
-      <p class="error" *ngIf="signupForm.get('password').errors.required">
-         Please enter your
-        password !
-      </p>
-      <p class="error" *ngIf="signupForm.get('password').errors.minlength">
-         Password length is
-        too short !
-      </p>
-    </div>
+    <div class="error" *ngIf="signupForm.get('password').errors && signupForm.get('password').touched">
+                        <p class="error" *ngIf="signupForm.get('password').errors.required">
+                           Password is required !
+                        </p>
+                        <p class="error" *ngIf="signupForm.get('password').errors.pattern">
+                          The password must be at least 8 characters long and include at least one special character, one uppercase letter, and one lowercase letter.
+                        </p>
+                      </div>
     <div class="input-group mb-3">
       <span class="input-group-text"><fa-icon [icon]="faLock"></fa-icon></span>
       <div class="form-floating">
@@ -105,18 +101,18 @@
     </div>
     <div class="error">
       <p class="error" *ngIf="
-          signupForm.get('confirmPassword').errors &&
-          signupForm.get('confirmPassword').touched
-        ">
+              signupForm.get('confirmPassword').errors &&
+              signupForm.get('confirmPassword').touched
+            ">
         
         Please re-enter your password !
       </p>
       <p class="error" *ngIf="
-          password != confirmPassword &&
-          signupForm.get('confirmPassword').touched
-        ">
+              password != confirmPassword &&
+              signupForm.get('confirmPassword').touched && !signupForm.get('confirmPassword').errors
+            ">
         
-        Password not matched
+        Password not matched !
       </p>
     </div>
     <button type="submit" id="submitButton" (click)="onAddStudent()" class="btn w-100">

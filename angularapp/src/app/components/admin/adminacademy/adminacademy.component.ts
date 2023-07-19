@@ -16,7 +16,6 @@ export class AdminacademyComponent implements OnInit {
   faPlus=faSquare;
   faChessBishop=faChessBishop;
   adminAcademyGridNumber:number=0;
-  adminName:string;
   
   constructor(private toaster:ToastrService,private router:Router,private auth: AuthService,private academy:AcademyService,private activeRouter:ActivatedRoute){}
   role:string;
@@ -31,9 +30,6 @@ export class AdminacademyComponent implements OnInit {
        for(let i=0;i<val.length;i++){
           this.academies.push(val[i]);
        }
-      })
-      this.auth.getAdminData(this.userID).subscribe((val)=>{
-          this.adminName=val.username;
       })
   }
 

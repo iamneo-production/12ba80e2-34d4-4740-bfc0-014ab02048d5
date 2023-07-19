@@ -15,7 +15,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 
 namespace WebApp.Controller{
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class AuthController: ControllerBase{ 
         private readonly AppDbContext _authContext;
@@ -23,22 +23,24 @@ namespace WebApp.Controller{
         public AuthController(AppDbContext appDbContext){
             _authContext=appDbContext;
         }
-    [HttpPost("login")]
+    [HttpPost("user/login")]
         public async Task<IActionResult> login([FromBody] Login obj){
         if (obj == null) return BadRequest();
         var user=await _authContext.Users.FirstOrDefaultAsync(x=> x.email==obj.email && x.password==obj.password);
         var admin=await _authContext.Admins.FirstOrDefaultAsync(x=> x.email==obj.email && x.password==obj.password);
         
         if(user != null){
-            user.Token = createJwt(user);
-            return Ok(new{ Message="User Logged in Successfully!",Token=user.Token });  
+            obj.Token = user.Token = createJwt(user);
+            return CreatedAtAction("GetLogin", new { id = obj.Id },obj); 
         } 
         else if(admin != null){
-            admin.Token = createJwt(admin);
-             return Ok(new {Message="Admin Logged in Successfully!", Token=admin.Token});
+            obj.Token=admin.Token = createJwt(admin);
+            return CreatedAtAction("GetLogin", new { id = obj.Id },obj);
         }
         else return NotFound();
     }
+
+    
     
     [HttpPost("userRegister")]
      public async Task<IActionResult> saveUser([FromBody] User userObj){
@@ -201,6 +203,16 @@ namespace WebApp.Controller{
             }
 
             return user;
+        }
+        [HttpGet("GetDetails/{id}")]
+        public async Task<ActionResult<Login>> GetLogin(int id)
+        {
+            var obj = await _authContext.Logins.FindAsync(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return obj;
         }
     }
 }

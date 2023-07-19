@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Models;
 namespace WebApp.Controller{
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class UserController: ControllerBase{ 
          private readonly AppDbContext _context;
@@ -24,6 +24,11 @@ namespace WebApp.Controller{
             return await _context.Students.ToListAsync();
         }
 
+        [HttpGet("user/ViewAdmission")]
+        public async Task<ActionResult<IEnumerable<Student>>> ViewAdmission()
+        {
+            return await _context.Students.ToListAsync();
+        }
         // GET: api/Student/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
@@ -72,8 +77,12 @@ namespace WebApp.Controller{
         // POST: api/Student
         [HttpPost]
         public async Task<ActionResult<Student>> PostStudent(Student student)
-        {
+        {   
+            if(await CheckCourseExist(student.userID,student.courseID )){
+                return BadRequest(new {Message="This Course already registered by student"});
+            }
             _context.Students.Add(student);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.id }, student);
@@ -94,10 +103,20 @@ namespace WebApp.Controller{
 
             return NoContent();
         }
+        [HttpGet("user/viewStatus")]
+        public async Task<ActionResult<IEnumerable<Institute>>> GetInstitute()
+        {
+            return await _context.Institutes.ToListAsync();
+        }
 
         private bool StudentExists(int id)
         {
             return _context.Students.Any(e => e.id == id);
+        }
+
+         private Task<bool> CheckCourseExist(int userID,int courseID )
+        {
+             return (_context.Students.AnyAsync(x => x.userID == userID && x.courseID == courseID));  
         }
     }
 }

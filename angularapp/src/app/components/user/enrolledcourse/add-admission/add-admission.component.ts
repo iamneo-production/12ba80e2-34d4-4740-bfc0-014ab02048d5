@@ -38,6 +38,7 @@ export class AddAdmissionComponent implements OnInit {
     private academy: AcademyService
   ) {}
   addStudentForm: FormGroup;
+  addCourseForm : FormGroup;
   todayDate = new Date();
   courseDuration;
   faChessKnight = faChessKnight;
@@ -61,19 +62,19 @@ export class AddAdmissionComponent implements OnInit {
       userID: new FormControl(null),
       firstname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       lastname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
-      gender: new FormControl(null, [Validators.required]),
+      gender: new FormControl("", [Validators.required]),
       fathername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       phonenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
       alternatenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
       mothername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       email: new FormControl(null, [Validators.required,Validators.email]),
-      age: new FormControl(null, [Validators.required]),
+      age: new FormControl(null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       housenumber: new FormControl(null, [Validators.required]),
       street: new FormControl(null, [Validators.required]),
       area: new FormControl(null, [Validators.required]),
-      passcode: new FormControl(null, [Validators.required]),
-      state: new FormControl(null, [Validators.required]),
-      nationality: new FormControl(null, [Validators.required]),
+      passcode: new FormControl(null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      state: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      nationality: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       joiningDate: new FormControl(null),
       endDate: new FormControl(null),
     });
@@ -90,17 +91,27 @@ export class AddAdmissionComponent implements OnInit {
       .subscribe((res) => {
         this.courseDuration = res.courseDuration;
       });
+
+      this.addCourseForm = new FormGroup({
+        courseId: new FormControl(null),
+        instituteID: new FormControl(null),
+        courseName: new FormControl(null),
+        studentenrolled: new FormControl(null),
+        courseDuration: new FormControl(null),
+        startTime: new FormControl (null),
+        endTime: new FormControl (null),
+        courseDescription: new FormControl(null)
+  })
   }
 
   onAddStudent() {
     const joinDate = new Date(this.todayDate);
-    console.log(joinDate);
     const expiryDate = new Date(
       joinDate.getFullYear(),
       joinDate.getMonth() + this.courseDuration,
       joinDate.getDate()
     );
-    console.log(expiryDate)
+
     const formattedExpiryDate =
       ('0' + expiryDate.getDate()).slice(-2) +
       '/' +
@@ -109,14 +120,33 @@ export class AddAdmissionComponent implements OnInit {
       expiryDate.getFullYear();
     this.addStudentForm.get('endDate').setValue(formattedExpiryDate);
     if (this.addStudentForm.valid) {
-      this.academy.addStudent(this.addStudentForm.value).subscribe((res) => {
+
+     
+      this.academy.addStudent(this.addStudentForm.value).subscribe({next:res=>{ 
+        this.academy.getCourse(this.addStudentForm.get('courseID').value).subscribe(val=>{
+          this.addCourseForm.get('courseId').setValue(val.courseId);
+          this.addCourseForm.get('instituteID').setValue(val.instituteID);
+          this.addCourseForm.get('courseName').setValue(val.courseName);
+          this.addCourseForm.get('courseDuration').setValue(val.courseDuration);
+          this.addCourseForm.get('courseDescription').setValue(val.courseDescription);
+          this.addCourseForm.get('studentenrolled').setValue((val.studentenrolled-1).toString());
+          this.addCourseForm.get('startTime').setValue(val.startTime);
+          this.addCourseForm.get('endTime').setValue(val.endTime);
+
+          this.academy.updateCourse(this.addStudentForm.get('courseID').value,this.addCourseForm.value).subscribe();
+        })
+        this.router.navigate(['/user/login']);
         this.toaster.success('SUCCESS', 'Course Enrolled Successfully', {
           timeOut: 3000,
         });
-      });
-      this.router.navigate(['/user/login']);
-    } else {
-      this.addStudentForm.markAllAsTouched();
-    }
+
+      },error:err=>{
+        this.toaster.error('ERROR', "This Course is already enrolled by you !!!", {
+          timeOut: 3000,
+        });
+        this.router.navigate(['/user/login']);
+      }})
+  } else {
+    this.addStudentForm.markAllAsTouched();
   }
-}
+  }}

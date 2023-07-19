@@ -79,12 +79,6 @@ export class AddCourseComponent implements OnInit {
     return null;
   }
   
-  
-  
-  
-  
-  
-
 
   onAddCourse() {
     if (this.addCourseForm.valid) {

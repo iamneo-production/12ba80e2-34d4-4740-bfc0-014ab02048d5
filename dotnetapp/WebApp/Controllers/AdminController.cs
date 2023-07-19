@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 
 namespace WebApp.Controller{
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class AdminController: ControllerBase{ 
         private readonly AppDbContext _context;
@@ -61,7 +61,6 @@ namespace WebApp.Controller{
                     throw;
                 }
             }
-
             return NoContent();
         }
 
@@ -93,8 +92,10 @@ namespace WebApp.Controller{
         }
 
         //InstituteController
+
+
         // GET: api/Institute
-        [HttpGet("GetInstitute")]
+        [HttpGet("admin/viewInstitutes")]
         public async Task<ActionResult<IEnumerable<Institute>>> GetInstitute()
         {
             return await _context.Institutes.ToListAsync();
@@ -179,6 +180,14 @@ namespace WebApp.Controller{
         private bool InstituteExists(int id)
         {
             return _context.Institutes.Any(e => e.instituteId == id);
+     
         }
+
+        [HttpGet("admin/ViewStudent")]
+        public async Task<ActionResult<IEnumerable<Student>>> GetAllStudent()
+        {
+            return await _context.Students.ToListAsync();
+        }
+
     }
 }

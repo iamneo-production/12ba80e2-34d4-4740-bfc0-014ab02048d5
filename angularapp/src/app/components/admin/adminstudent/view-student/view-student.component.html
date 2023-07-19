@@ -21,6 +21,7 @@
       <th scope="col">StudentID</th>
       <th scope="col">Student name</th>
       <th scope="col">Enrolled Course</th>
+      <th scope="col">Academy</th>
       <th scope="col">Mobile Number</th>
       <th scope="col">Actions</th>
     </tr>
@@ -30,10 +31,14 @@
       <ng-container
         *ngFor="let student of allStudents | filter : searchInInput:'firstname'; let i=index;"
       >
-        <tr *ngIf="course.courseId === student.courseID" id="studentGrid{{i+1}}">
+      <ng-container
+      *ngFor="let academy of allAcademies"
+    >
+        <tr *ngIf="course.courseId === student.courseID && course.instituteID === academy.instituteId" id="studentGrid{{i+1}}">
           <th scope="row">{{ student.id }}</th>
           <td>{{ student.firstname + " " + student.lastname }}</td>
           <td>{{ course.courseName }}</td>
+          <td>{{academy.instituteName}}</td>
           <td>{{ student.phonenumber }}</td>
           <td>
             <div>
@@ -48,12 +53,13 @@
                 ><fa-icon
                   [icon]="faTrashCan"
                   routerLink="/admin/deleteStudent/{{ student.id }}"
-                  (click)="onDeleteStudent(student.id)"
+                  (click)="onDeleteStudent(student.id,course.courseId)"
                 ></fa-icon
               ></a>
             </div>
           </td>
         </tr>
+      </ng-container>
       </ng-container>
     </ng-container>
   </tbody>

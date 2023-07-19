@@ -1,7 +1,7 @@
 <app-admin-navbar></app-admin-navbar>
 <p class="text-center fw-bolder fs-2 p-2 my-2" style="background-color: var(--accent);">Update Student Details</p>
 <form class="p-4" [formGroup]="updateStudentForm">
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -9,7 +9,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editFirstName"
             type="text"
             class="form-control"
             placeholder="firstname"
@@ -19,14 +18,18 @@
         </div>
       </div>
       <div
-        class="error"
-        *ngIf="
-          updateStudentForm.get('firstname').errors &&
-          updateStudentForm.get('firstname').touched
-        "
+        class="error" *ngIf="
+        updateStudentForm.get('firstname').errors &&
+        updateStudentForm.get('firstname').touched
+      "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your firstname !</p>
+        
+        <p  *ngIf="
+        updateStudentForm.get('firstname').errors.required 
+      ">Please enter your firstname !</p>
+      <p  *ngIf="
+        updateStudentForm.get('firstname').errors.pattern 
+      ">Special characters and numbers are not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -36,7 +39,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editLastName"
             type="text"
             class="form-control"
             placeholder="lastname"
@@ -45,37 +47,36 @@
           <label class="form-label">Lastname</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          updateStudentForm.get('lastname').errors &&
-          updateStudentForm.get('lastname').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your lastname !</p>
+      <div class="error" *ngIf="
+      updateStudentForm.get('lastname').errors &&
+      updateStudentForm.get('lastname').touched
+    ">
+        <p *ngIf="
+        updateStudentForm.get('lastname').errors.required 
+      ">Please enter your lastname !</p>
+      <p *ngIf="
+        updateStudentForm.get('lastname').errors.pattern
+      ">Special characters and numbers are not allowed !</p>
       </div>
     </div>
     <div class="col">
-      <select formControlName="gender" class="form-select p-3" aria-label="Default select example">
-        <option value=null selected disabled>Select your gender</option>
-        <option value="male" id="male">Male</option>
-        <option value="female" id="female">Female</option>
-      </select>
-      <div
-        class="error"
-        *ngIf="
-          updateStudentForm.get('gender').errors &&
-          updateStudentForm.get('gender').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your gender !</p>
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faVenusMars"></fa-icon
+        ></span>
+        <select formControlName="gender" id="gender" class="form-control">
+          <option value="" disabled selected>Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div style="color: red;"*ngIf="updateStudentForm.get('gender').touched && updateStudentForm.get('gender').errors" >
+        Select your gender !
       </div>
     </div>
   </div>
-  <div class="row p-3">
-    <div class="row p-3">
+  <div class="row">
+    <div class="row">
       <div class="col">
         <div class="input-group mb-3">
           <span class="input-group-text"
@@ -83,7 +84,6 @@
           ></span>
           <div class="form-floating">
             <input
-            id="editFatherName"
               type="text"
               class="form-control"
               placeholder="fathername"
@@ -95,12 +95,17 @@
         <div
           class="error"
           *ngIf="
-            updateStudentForm.get('fathername').errors &&
-            updateStudentForm.get('fathername').touched
-          "
+          updateStudentForm.get('fathername').errors &&
+          updateStudentForm.get('fathername').touched
+        "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter your fathername !</p>
+          
+          <p   *ngIf="
+          updateStudentForm.get('fathername').errors.required 
+        ">Please enter your fathername !</p>
+        <p *ngIf="
+          updateStudentForm.get('fathername').errors.pattern 
+        ">Special characters and numbers are not allowed !</p>
         </div>
       </div>
       <div class="col">
@@ -110,24 +115,28 @@
           ></span>
           <div class="form-floating">
             <input
-            id="editPhoneNumber1"
               type="text"
               class="form-control"
               placeholder="phonenumber"
               formControlName="phonenumber"
             />
-            <label class="form-label">Phone Number</label>
+            <label class="form-label">Mobile Number</label>
           </div>
         </div>
         <div
           class="error"
           *ngIf="
-            updateStudentForm.get('phonenumber').errors &&
-            updateStudentForm.get('phonenumber').touched
-          "
+          updateStudentForm.get('phonenumber').errors &&
+          updateStudentForm.get('phonenumber').touched
+        "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter your phonenumber !</p>
+          
+          <p  *ngIf="
+          updateStudentForm.get('phonenumber').errors.required 
+        ">Please enter your Mobile Number !</p>
+        <p  *ngIf="
+          updateStudentForm.get('phonenumber').errors.pattern 
+        ">Mobile number format is not correct !</p>
         </div>
       </div>
       <div class="col">
@@ -137,29 +146,33 @@
           ></span>
           <div class="form-floating">
             <input
-            id="editPhoneNumber2"
               type="text"
               class="form-control"
               placeholder="alternatenumberr"
               formControlName="alternatenumber"
             />
-            <label class="form-label">Alternate Phone Number</label>
+            <label class="form-label">Alternate Mobile Number</label>
           </div>
         </div>
         <div
           class="error"
           *ngIf="
-            updateStudentForm.get('alternatenumber').errors &&
-            updateStudentForm.get('alternatenumber').touched
-          "
+          updateStudentForm.get('alternatenumber').errors &&
+          updateStudentForm.get('alternatenumber').touched
+        "
         >
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-          <p>Please enter your alternatenumber !</p>
+          
+          <p *ngIf="
+          updateStudentForm.get('alternatenumber').errors.required 
+        ">Please enter your alternate mobile number !</p>
+        <p *ngIf="
+          updateStudentForm.get('alternatenumber').errors.pattern
+        ">Mobile number format is not correct !</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -167,7 +180,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editMotherName"
             type="text"
             class="form-control"
             placeholder="mothername"
@@ -179,12 +191,16 @@
       <div
         class="error"
         *ngIf="
-          updateStudentForm.get('mothername').errors &&
-          updateStudentForm.get('mothername').touched
-        "
+        updateStudentForm.get('mothername').errors &&
+        updateStudentForm.get('mothername').touched
+      "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your mother name !</p>
+        <p  *ngIf="
+        updateStudentForm.get('mothername').errors.required 
+      ">Please enter your mother name !</p>
+      <p  *ngIf="
+      updateStudentForm.get('mothername').errors.pattern
+    ">Special characters is not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -194,7 +210,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editEmailId"
             type="email"
             class="form-control"
             placeholder="email"
@@ -206,12 +221,16 @@
       <div
         class="error"
         *ngIf="
-          updateStudentForm.get('email').errors &&
-          updateStudentForm.get('email').touched
-        "
+        updateStudentForm.get('email').errors && updateStudentForm.get('email').touched
+      "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your email !</p>
+        
+        <p   *ngIf="
+        updateStudentForm.get('email').errors.required
+      ">Please enter your email !</p>
+      <p   *ngIf="
+        updateStudentForm.get('email').errors.email
+      ">Email format is not correct !</p>
       </div>
     </div>
     <div class="col">
@@ -221,7 +240,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editAge"
             type="text"
             class="form-control"
             placeholder="age"
@@ -230,20 +248,14 @@
           <label class="form-label">age</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          updateStudentForm.get('age').errors &&
-          updateStudentForm.get('age').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your age !</p>
+      <div class="error" *ngIf=" updateStudentForm.get('age').errors && updateStudentForm.get('age').touched">
+        <p *ngIf=" updateStudentForm.get('age').errors.required ">Please enter your age !</p>
+        <p *ngIf=" updateStudentForm.get('age').errors.pattern">Please enter a valid age !</p>
       </div>
     </div>
   </div>
 <div class="additional-info"> <p class="fs-5 fst-italic ms-3">Some Additional Information</p>
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -251,7 +263,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editHouseNo"
             type="text"
             class="form-control"
             placeholder="housenumber"
@@ -261,13 +272,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           updateStudentForm.get('housenumber').errors &&
           updateStudentForm.get('housenumber').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your house number !</p>
       </div>
     </div>
@@ -278,7 +289,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editStreetName"
             type="text"
             class="form-control"
             placeholder="street"
@@ -288,19 +298,19 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           updateStudentForm.get('street').errors &&
           updateStudentForm.get('street').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your street address !</p>
       </div>
     </div>
   </div>
 
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -308,7 +318,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editAreaName"
             type="text"
             class="form-control"
             placeholder="area"
@@ -318,13 +327,13 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           updateStudentForm.get('area').errors &&
           updateStudentForm.get('area').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your area !</p>
       </div>
     </div>
@@ -335,29 +344,33 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editPincode"
             type="text"
             class="form-control"
             placeholder="passcode"
             formControlName="passcode"
           />
-          <label class="form-label">Pincode</label>
+          <label class="form-label">Passcode</label>
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
-          updateStudentForm.get('passcode').errors &&
-          updateStudentForm.get('passcode').touched
-        "
+        updateStudentForm.get('passcode').errors &&
+        updateStudentForm.get('passcode').touched
+      "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your passcode !</p>
+        
+        <p  *ngIf="
+        updateStudentForm.get('passcode').errors.required
+      ">Please enter your passcode !</p>
+      <p  *ngIf="
+      updateStudentForm.get('passcode').errors.pattern
+    ">Please enter valid passcode !</p>
       </div>
     </div>
   </div>
 
-  <div class="row p-3">
+  <div class="row">
     <div class="col">
       <div class="input-group mb-3">
         <span class="input-group-text"
@@ -365,7 +378,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editState"
             type="text"
             class="form-control"
             placeholder="state"
@@ -375,14 +387,15 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           updateStudentForm.get('state').errors &&
           updateStudentForm.get('state').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your state !</p>
+        
+        <p *ngIf="updateStudentForm.get('state').errors.required ">Please enter your state !</p>
+        <p *ngIf="updateStudentForm.get('state').errors.pattern ">Please enter valid name of state !</p>
       </div>
     </div>
     <div class="col">
@@ -392,7 +405,6 @@
         ></span>
         <div class="form-floating">
           <input
-          id="editNationality"
             type="text"
             class="form-control"
             placeholder="nationality"
@@ -402,22 +414,23 @@
         </div>
       </div>
       <div
-        class="error"
+        class="error1"
         *ngIf="
           updateStudentForm.get('nationality').errors &&
           updateStudentForm.get('nationality').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your nationality !</p>
+        
+        <p *ngIf="updateStudentForm.get('nationality').errors.required">Please enter your nationality !</p>
+        <p *ngIf="updateStudentForm.get('nationality').errors.pattern">Special characters and numbers are not allowed !</p>
       </div>
     </div>
   </div>
 </div>
 
   <div class="">
-    <button class="btn updatestudent" id="updateStudent" (click)="onUpdateStudent()">
-      Update Student <fa-icon [icon]="faChessBishop"></fa-icon>
+    <button class="btn updateStudent" (click)="onUpdateStudent()">
+      Update Admission Details
     </button>
   </div>
 </form>

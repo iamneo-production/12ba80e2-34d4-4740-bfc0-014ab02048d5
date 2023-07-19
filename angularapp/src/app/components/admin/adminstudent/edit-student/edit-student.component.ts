@@ -53,21 +53,22 @@ export class EditStudentComponent implements OnInit {
     this.updateStudentForm = new FormGroup({
       id: new FormControl(null),
       courseID: new FormControl(null),
-      firstname: new FormControl(null, [Validators.required]),
-      lastname: new FormControl(null, [Validators.required]),
-      gender: new FormControl(null, [Validators.required]),
-      fathername: new FormControl(null, [Validators.required]),
-      phonenumber: new FormControl(null, [Validators.required,Validators.pattern(/^\d{10}$/)]),
-      alternatenumber: new FormControl(null, [Validators.required,Validators.pattern(/^\d{10}$/)]),
-      mothername: new FormControl(null, [Validators.required]),
+      userID: new FormControl(null),
+      firstname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      lastname: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      gender: new FormControl("", [Validators.required]),
+      fathername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      phonenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
+      alternatenumber: new FormControl(null, [Validators.required,Validators.pattern(/^(?!([0-9])\1{9}$)\d{10}$/)]),
+      mothername: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       email: new FormControl(null, [Validators.required,Validators.email]),
-      age: new FormControl(null, [Validators.required]),
+      age: new FormControl(null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
       housenumber: new FormControl(null, [Validators.required]),
       street: new FormControl(null, [Validators.required]),
       area: new FormControl(null, [Validators.required]),
-      passcode: new FormControl(null, [Validators.required]),
-      state: new FormControl(null, [Validators.required]),
-      nationality: new FormControl(null, [Validators.required]),
+      passcode: new FormControl(null, [Validators.required,Validators.pattern(/^[1-9]\d*$/)]),
+      state: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
+      nationality: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z\s]*$/)]),
       joiningDate: new FormControl(null, [Validators.required]),
       endDate: new FormControl(null, [Validators.required]),
     });
@@ -75,6 +76,7 @@ export class EditStudentComponent implements OnInit {
       .getStudentDataById(this.activeRouter.snapshot.params['id'])
       .subscribe((res) => {
         this.updateStudentForm.get('id').setValue(res.id);
+        this.updateStudentForm.get('userID').setValue(res.userID);
         this.updateStudentForm.get('courseID').setValue(res.courseID);
         this.updateStudentForm.get('firstname').setValue(res.firstname);
         this.updateStudentForm.get('lastname').setValue(res.lastname);

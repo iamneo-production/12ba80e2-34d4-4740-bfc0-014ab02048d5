@@ -44,7 +44,7 @@ export class EditInstituteComponent implements OnInit {
     this.updateAcademyForm = new FormGroup({
       instituteId: new FormControl(),
       instituteName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
-      mobile: new FormControl(null, [Validators.required,Validators.pattern(/^\d{10}$/)]),
+      mobile: new FormControl(null, [Validators.required,Validators.pattern(/^(?:\+91|0)?[6789]\d{9}$/)]),
       image: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required,Validators.email]),
       instituteAddress: new FormControl(null, [Validators.required]),

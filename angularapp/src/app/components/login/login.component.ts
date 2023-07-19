@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
           this.loginForm.reset();
-          this.auth.storeToken(res.token);
-          this.notif.success('SUCCESS', res.message, { timeOut: 3000 });
+          this.auth.storeToken(res.token);  
           if (this.auth.getRole() === 'admin') {
             this.router.navigate(['/admin/viewInstitutes']);
+            this.notif.success('SUCCESS', 'Admin logged in successfully', { timeOut: 3000 });
           } else {
             this.router.navigate(['/user/login']);
+            this.notif.success('SUCCESS', 'User logged in successfully', { timeOut: 3000 });
           }
         },
         error: (err) => {

@@ -11,7 +11,7 @@ import {
   faEnvelope,
   faLock,
   faExclamationTriangle,
-  faChessKing,
+  faClock,
   faUser,
   faMobile,
   faImage,
@@ -40,6 +40,7 @@ export class EditCourseComponent implements OnInit {
   faLocation = faLocationArrow;
   faChessBishop = faChessBishop;
   faBook = faBook;
+  faClock=faClock;
   ngOnInit(): void {
     this.updateCourseForm = new FormGroup({
       courseId: new FormControl(null),
@@ -50,7 +51,7 @@ export class EditCourseComponent implements OnInit {
       startTime: new FormControl(null, [Validators.required]),
       endTime: new FormControl(null, [Validators.required]),
       courseDescription: new FormControl(null, [Validators.required]),
-    });
+    },{validators: this.courseTimingValidator });
 
     this.academy
       .getCourse(this.activeRouter.snapshot.params['id'])
@@ -65,6 +66,39 @@ export class EditCourseComponent implements OnInit {
         this.updateCourseForm.get('courseDescription').setValue(res.courseDescription);
       });
   }
+
+  courseTimingValidator(formGroup: FormGroup): { [key: string]: any } | null {
+    const startTime = formGroup.get('startTime').value;
+    const endTime = formGroup.get('endTime').value;
+  
+    if (startTime && endTime) {
+      const [startHour, startMinute] = startTime.split(':').map(Number);
+      const [endHour, endMinute] = endTime.split(':').map(Number);
+  
+      const startMinutes = startHour * 60 + startMinute;
+      const endMinutes = endHour * 60 + endMinute;
+  
+      if (endMinutes < startMinutes) {
+        // Handling the case of crossing midnight
+        const timeDifference = (endMinutes + 24 * 60) - startMinutes;
+        const maxTimeGap = 4 * 60; // 4 hours in minutes
+  
+        if (timeDifference > maxTimeGap) {
+          return { maxTimeGapExceeded: true };
+        }
+      } else {
+        const timeDifference = endMinutes - startMinutes;
+        const maxTimeGap = 4 * 60; // 4 hours in minutes
+  
+        if (timeDifference > maxTimeGap) {
+          return { maxTimeGapExceeded: true };
+        }
+      }
+    }
+  
+    return null;
+  }
+
   onUpdateCourse() {
     if(this.updateCourseForm.valid){
     this.academy
@@ -79,7 +113,7 @@ export class EditCourseComponent implements OnInit {
         ]);
       });
   }else{
-    this.toaster.error('Invalid details','Error',{timeOut:3000});
+    this.updateCourseForm.markAllAsTouched();
   }
 }
 }

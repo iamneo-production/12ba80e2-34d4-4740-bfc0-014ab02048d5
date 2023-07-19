@@ -7,7 +7,7 @@
             <div class="row justify-content-center">
               <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Welcome to Chess Academy Portal Signup</p>
 
                 <form [formGroup]="signupForm" class="mx-1 mx-md-4">
 
@@ -50,7 +50,7 @@
                         <div
                           *ngIf="signupForm.get('username').hasError('minlength') && !(signupForm.get('username').hasError('pattern'))">
                           Username should contain more than
-                          6 characters</div>
+                          2 characters</div>
                         <div *ngIf="signupForm.get('username').hasError('pattern')">Username should be Alphanumeric
                           characters</div>
                       </div>
@@ -81,7 +81,7 @@
                       <span class="password-toggle-icon" (click)="toggle()" *ngIf="!showPass"><fa-icon
                           [icon]="faEyeSlash"></fa-icon></span>
                       <span class="password-toggle-icon" (click)="toggle()" *ngIf="showPass"><fa-icon
-                          [icon]="faEye"></fa-icon></span>
+                          [icon]="faEye"></fa-icon>Hello</span>
                       <div class="text-danger" *ngIf="
         signupForm.get('password').errors && signupForm.get('password').touched
       ">
@@ -111,7 +111,7 @@
                                 signupForm.get('confirmPassword').touched
                               ">
                           
-                          Please re-enter your password !
+                          Please re-enter your password
                         </p>
                         <p class="text-danger" *ngIf="
                                 password != confirmPassword &&
@@ -130,7 +130,7 @@
                   </div>
                   <div class="text-center mt-3">
                     <p>Already have an account?
-                    <a (click)="loginButton()" id="signupLink" style="cursor: pointer; color: var(--accent); text-decoration:underline;">Sign up</a>
+                    <a (click)="loginButton()" id="signupLink" style="cursor: pointer; color: var(--accent); text-decoration:underline;">Login</a>
                     </p>
                   </div>
                 </form>

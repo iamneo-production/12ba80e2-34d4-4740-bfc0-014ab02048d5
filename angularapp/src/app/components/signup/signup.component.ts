@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -17,6 +18,7 @@ export class SignupComponent implements OnInit {
   showConfirmPass: boolean = false;
   passType: string = 'password';
   confirmPassType: string = 'password';
+  faEye=faEye;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -26,7 +28,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{8,}$/)]),
-      username: new FormControl(null,[Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Z0-9]+$/)]),
+      username: new FormControl(null,[Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]+$/)]),
       userRole: new FormControl('user'),
       mobileNumber: new FormControl(null, [
         Validators.required, this.validateMobileNumber,

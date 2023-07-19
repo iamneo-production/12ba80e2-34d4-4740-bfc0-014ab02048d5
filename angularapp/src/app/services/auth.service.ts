@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   constructor(private http:HttpClient,private router:Router) { }
-  private baseURL:string="https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io/api/Auth";
+  private baseURL:string="https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io";
   userRegister(data:any){
     return this.http.post<any>(`${this.baseURL}/userRegister`,data);
   }
@@ -25,7 +25,7 @@ export class AuthService {
     return this.http.get<any>(`${this.baseURL}/GetUser/${id}`);
   }
   login(data:any){
-    return this.http.post<any>(`${this.baseURL}/login`,data);
+    return this.http.post<any>(`${this.baseURL}/user/login`,data);
   }
   storeToken(tokenValue: string){
     localStorage.setItem('token',tokenValue);
