@@ -91,6 +91,16 @@ export class AddAdmissionComponent implements OnInit {
       .subscribe((res) => {
         this.courseDuration = res.courseDuration;
       });
+      this.addCourseForm = new FormGroup({
+        courseId: new FormControl(null),
+        instituteID: new FormControl(null),
+        courseName: new FormControl(null),
+        studentenrolled: new FormControl(null),
+        courseDuration: new FormControl(null),
+        startTime: new FormControl (null),
+        endTime: new FormControl (null),
+        courseDescription: new FormControl(null)
+  })
     }
 
   onAddStudent() {
@@ -109,9 +119,18 @@ export class AddAdmissionComponent implements OnInit {
       expiryDate.getFullYear();
     this.addStudentForm.get('endDate').setValue(formattedExpiryDate);
     if (this.addStudentForm.valid) {
-
-     
       this.academy.addStudent(this.addStudentForm.value).subscribe({next:res=>{ 
+        this.academy.getCourse(this.addStudentForm.get('courseID').value).subscribe(val=>{
+          this.addCourseForm.get('courseId').setValue(val.courseId);
+          this.addCourseForm.get('instituteID').setValue(val.instituteID);
+          this.addCourseForm.get('courseName').setValue(val.courseName);
+          this.addCourseForm.get('courseDuration').setValue(val.courseDuration);
+          this.addCourseForm.get('courseDescription').setValue(val.courseDescription);
+          this.addCourseForm.get('studentenrolled').setValue(((val.studentenrolled)-1).toString());
+          this.addCourseForm.get('startTime').setValue(val.startTime);
+          this.addCourseForm.get('endTime').setValue(val.endTime);
+          this.academy.updateCourse(this.addStudentForm.get('courseID').value,this.addCourseForm.value).subscribe();
+        })
         this.router.navigate(['/user/login']);
         this.toaster.success('SUCCESS', 'Course Enrolled Successfully', {
           timeOut: 3000,

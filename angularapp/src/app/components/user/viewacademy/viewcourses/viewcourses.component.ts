@@ -58,7 +58,7 @@ export class ViewcoursesComponent {
     this.academy.checkEnrolledCourse(this.checkCourseEnrolledForm.value).subscribe(res=>{
       let check=res;
       if(check){
-        this.toaster.error('ERROR','You Already Enrolled this course',{timeOut:3000});
+        this.toaster.warning('You Already Enrolled this course');
       }else{
         console.log(check);
         this.router.navigate([`user/addAdmission/${courseID}`]);
