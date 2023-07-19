@@ -42,7 +42,7 @@ namespace WebApp.Controller{
 
     
     
-    [HttpPost("userRegister")]
+    [HttpPost("user/signup")]
      public async Task<IActionResult> saveUser([FromBody] User userObj){
         if(userObj==null) return BadRequest(new {Message="user is null"});
         if (await CheckEmailExistUser(userObj.email)) return BadRequest(new { Message = "Eamil Already Exist!!! " });
@@ -51,7 +51,7 @@ namespace WebApp.Controller{
         await _authContext.SaveChangesAsync();
         return Ok(new{ Message = "User Registered" });
     }
-    [HttpPost("adminRegister")]
+    [HttpPost("admin/signup")]
      public async Task<IActionResult> saveAdmin([FromBody] Admin adminObj){
         if(adminObj==null) return BadRequest(new {Message="admin is null"});
         if (await CheckEmailExistAdmin(adminObj.email)) return BadRequest(new { Message = "Eamil Already Exist!!! " });

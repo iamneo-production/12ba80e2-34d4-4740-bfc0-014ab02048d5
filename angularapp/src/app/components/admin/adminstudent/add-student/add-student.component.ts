@@ -25,7 +25,6 @@ export class AddStudentComponent implements OnInit {
     private auth: AuthService,
     private notif: ToastrService,
     private router: Router,
-    private toaster: ToastrService
   ) {}
   signupForm: FormGroup;
   todayDate = new Date();
@@ -65,6 +64,7 @@ export class AddStudentComponent implements OnInit {
     if (this.signupForm.valid) {
         this.auth.userRegisterSendEmail(this.signupForm.value).subscribe({next:(res)=>{
           this.notif.success('Student added successfully',res.Message,{timeOut:3000});
+          this.router.navigate(['admin/viewInstitutes']);
         },error:(err)=>{
           this.notif.error('Error',err.Message,{timeOut:3000});
         }})

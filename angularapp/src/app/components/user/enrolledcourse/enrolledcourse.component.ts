@@ -88,7 +88,7 @@ export class EnrolledcourseComponent implements OnInit{
         this.academy.updateCourse(courseId,this.addCourseForm.value).subscribe();
         location.reload();
       })  
-      this.toaster.warning("Student deleted","Deleted",{timeOut:3000});
+      this.toaster.error("Enrolled course deleted","Deleted",{timeOut:3000});
     })
   }
   fetchinstituteId(id){

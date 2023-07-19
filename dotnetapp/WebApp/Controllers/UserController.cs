@@ -45,7 +45,7 @@ namespace WebApp.Controller{
 
         // PUT: api/Student/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("updateStudent/{id}")]
+        [HttpPut("user/editAdmission/{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
             if (id != student.id)
@@ -75,7 +75,7 @@ namespace WebApp.Controller{
         }
 
         // POST: api/Student
-        [HttpPost("postStudent")]
+        [HttpPost("user/addAdmission")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {   
             _context.Students.Add(student);
@@ -93,7 +93,7 @@ namespace WebApp.Controller{
 
 
         // DELETE: api/Student/5
-        [HttpDelete("deleteStudent/{id}")]
+        [HttpDelete("user/deleteAdmission/{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             var student = await _context.Students.FindAsync(id);

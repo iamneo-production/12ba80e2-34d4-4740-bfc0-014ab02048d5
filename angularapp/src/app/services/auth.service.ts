@@ -10,10 +10,10 @@ export class AuthService {
   constructor(private http:HttpClient,private router:Router) { }
   private baseURL:string="https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io";
   userRegister(data:any){
-    return this.http.post<any>(`${this.baseURL}/userRegister`,data);
+    return this.http.post<any>(`${this.baseURL}/user/signup`,data);
   }
   adminRegister(data:any){
-    return this.http.post<any>(`${this.baseURL}/adminRegister`,data);
+    return this.http.post<any>(`${this.baseURL}/admin/signup`,data);
   }
   userRegisterSendEmail(data:any){
     return this.http.post<any>(`${this.baseURL}/sendEmail`,data);

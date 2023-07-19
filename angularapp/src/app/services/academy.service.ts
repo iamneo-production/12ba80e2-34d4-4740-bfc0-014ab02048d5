@@ -18,7 +18,7 @@ export class AcademyService {
 
   //INSTITUTE
   addAcademy(data: any) {
-    return this.http.post<any>(`${this.AcademyURL}/PostInstitute`, data);
+    return this.http.post<any>(`${this.AcademyURL}/admin/addInstitute`, data);
   }
   getAcademy() {
     return this.http.get<any>(`${this.AcademyURL}/admin/viewInstitutes`);
@@ -27,10 +27,10 @@ export class AcademyService {
     return this.http.get<any>(`${this.AcademyURL}/GetInstituteID/${id}`);
   }
   updateAcademy(id: number, data: any) {
-    return this.http.put<any>(`${this.AcademyURL}/PutInstitute/${id}`, data);
+    return this.http.put<any>(`${this.AcademyURL}/admin/editInstitute/${id}`, data);
   }
   deleteAcademy(id: number) {
-    return this.http.delete<any>(`${this.AcademyURL}/DeleteInstitute/${id}`);
+    return this.http.delete<any>(`${this.AcademyURL}/admin/deleteInstitutes/${id}`);
   }
   deleteAcademyCourse(id: number) {
     return this.http.delete<any>(`${this.AcademyURL}/DeleteAcademyCourse/${id}`);
@@ -38,7 +38,7 @@ export class AcademyService {
 
   //COURSES
   addCourse(data: any) {
-    return this.http.post<any>(`${this.CourseURL}/PostCourse`, data);
+    return this.http.post<any>(`${this.CourseURL}/admin/addCourse`, data);
   }
   getCourse(id: any) {
     return this.http.get<any>(`${this.CourseURL}/GetCourse/${id}`);
@@ -47,17 +47,17 @@ export class AcademyService {
     return this.http.get<any>(`${this.CourseURL}/admin/viewCourse`);
   }
   updateCourse(id: any, data: any) {
-    return this.http.put<any>(`${this.CourseURL}/PutCourse/${id}`, data);
+    return this.http.put<any>(`${this.CourseURL}/admin/editCourse/${id}`, data);
   }
   deleteCourse(id: any) {
-    return this.http.delete<any>(`${this.CourseURL}/DeleteCourse/${id}`);
+    return this.http.delete<any>(`${this.CourseURL}/admin/deleteCourse/${id}`);
   }
   //BOTH ADMIN AND USER CONTROL
 
   //ADMISSION
 
   addStudent(data: any) {
-    return this.http.post<any>(`${this.StudentURL}/postStudent`, data);
+    return this.http.post<any>(`${this.StudentURL}/user/addAdmission`, data);
   }
   getStudent() {
     return this.http.get<any>(`${this.StudentURL}/GetStudents`);
@@ -66,10 +66,10 @@ export class AcademyService {
     return this.http.get<any>(`${this.StudentURL}/GetStudents/${id}`);
   }
   updateStudent(id: number, data: any) {
-    return this.http.put<any>(`${this.StudentURL}/updateStudent/${id}`, data);
+    return this.http.put<any>(`${this.StudentURL}/user/editAdmission/${id}`, data);
   }
   deleteStudent(id: number) {
-    return this.http.delete<any>(`${this.StudentURL}/deleteStudent/${id}`);
+    return this.http.delete<any>(`${this.StudentURL}/user/deleteAdmission/${id}`);
   }
   checkEnrolledCourse(data:any){
     return this.http.post<any>(`${this.StudentURL}/checkCourseExists`,data);
