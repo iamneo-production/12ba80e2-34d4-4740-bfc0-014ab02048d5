@@ -18,7 +18,7 @@ namespace WebApp.Controller{
             _context = context;
         }
         // GET: api/Student
-        [HttpGet]
+        [HttpGet("GetStudents")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudent()
         {
             return await _context.Students.ToListAsync();
@@ -30,7 +30,7 @@ namespace WebApp.Controller{
             return await _context.Students.ToListAsync();
         }
         // GET: api/Student/5
-        [HttpGet("{id}")]
+        [HttpGet("GetStudents/{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -45,7 +45,7 @@ namespace WebApp.Controller{
 
         // PUT: api/Student/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("updateStudent/{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
             if (id != student.id)
@@ -75,21 +75,25 @@ namespace WebApp.Controller{
         }
 
         // POST: api/Student
-        [HttpPost]
+        [HttpPost("postStudent")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
         {   
-            if(await CheckCourseExist(student.userID,student.courseID )){
-                return BadRequest(new {Message="This Course already registered by student"});
-            }
             _context.Students.Add(student);
 
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.id }, student);
         }
+        [HttpPost("checkCourseExists")]
+        public async Task<ActionResult<bool>> CheckCourseExists(checkAlreadyEnrolledCourse obj)
+        {   
+            bool courseExists = await CheckCourseExist(obj.userID, obj.courseID);
+            return courseExists;
+        }
+
 
         // DELETE: api/Student/5
-        [HttpDelete("{id}")]
+        [HttpDelete("deleteStudent/{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             var student = await _context.Students.FindAsync(id);

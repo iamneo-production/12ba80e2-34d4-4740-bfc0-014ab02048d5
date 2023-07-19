@@ -39,7 +39,7 @@
             <button
               class="btn"
               id="enrollbutton"
-              routerLink="/user/addAdmission/{{ course.courseId }}"
+              (click)="checkAlreadyEnrolled(course.courseId)"
               *ngIf="course.studentenrolled>0; else elseblock"
             >
               Enroll

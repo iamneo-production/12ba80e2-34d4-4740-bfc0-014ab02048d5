@@ -21,7 +21,7 @@ namespace WebApp.Controller{
             _context = context;
         }
         // GET: api/Course
-        [HttpGet("GetCourse")]
+        [HttpGet("admin/viewCourse")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
             return await _context.Courses.ToListAsync();
