@@ -1,0 +1,36 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #ffffff;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #dbb4ff, #8fc8f6, #b3e3ff, #7871ff);
+    }
+    
+    .gradient-custom-3{
+        background: linear-gradient(-100deg,#dbb4ff, #8fc8f6, #b3e3ff, #7871ff);
+        color: black;
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+    
+    .textalign{
+        font-size: 20px;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .image{
+        text-align:center;
+        padding-top:0px;
+    
+    }
