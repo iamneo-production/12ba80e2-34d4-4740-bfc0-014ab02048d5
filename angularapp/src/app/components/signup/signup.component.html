@@ -1,0 +1,149 @@
+<section class="vh-100" style="background-color: #ffffff;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Welcome to Chess Academy Portal Signup</p>
+  
+                  <form [formGroup]="signupForm" class="mx-1 mx-md-4">
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example1c">Role</label>
+                        <select class="form-control" formControlName="userRole">
+                          <option value="user">User</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                        <div *ngIf="signupForm.get('userRole').errors && signupForm.get('userRole').touched"
+                          class="text-danger">
+                          <div *ngIf="signupForm.get('userRole').errors.required">Role is required</div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example1c">Email</label>
+                        <input type="text" id="form3Example1c" formControlName="email" class="form-control" />
+                        <div *ngIf="signupForm.get('email').errors && (signupForm.get('email').touched)"
+                          class="text-danger">
+                          <div *ngIf="signupForm.get('email').errors.required">Email is required</div>
+                          <div *ngIf="signupForm.get('email').errors.email">Please Enter a Valid Email</div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example1c">Username</label>
+                        <input type="text" id="form3Example1c" formControlName="username" class="form-control" />
+                        <div *ngIf="signupForm.get('username')?.errors && (signupForm.get('username')?.touched)"
+                          class="text-danger">
+                          <div *ngIf="signupForm.get('username').errors.required">Username is required</div>
+                          <div
+                            *ngIf="signupForm.get('username').hasError('minlength') && !(signupForm.get('username').hasError('pattern'))">
+                            Username should contain more than
+                            2 characters</div>
+                          <div *ngIf="signupForm.get('username').hasError('pattern')">Username should be Alphanumeric
+                            characters</div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example3c">Mobile Number</label>
+                        <input type="email" id="form3Example3c" formControlName="mobileNumber" class="form-control" />
+                        <div *ngIf="signupForm.get('mobileNumber').errors && (signupForm.get('mobileNumber').touched)"
+                          class="text-danger">
+                          <div *ngIf="signupForm.get('mobileNumber').errors.required">Mobile Number is required</div>
+                          <div
+                            *ngIf="signupForm.get('mobileNumber').errors.invalidMobileNumber && !(signupForm.get('mobileNumber').errors.required)">
+                            Please Enter a Valid Mobile Number</div>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example4c">Password</label>
+                        <input type="{{ passType }}" class="form-control" id="password"
+                          formControlName="password" [(ngModel)]="password" />
+                        <span class="password-toggle-icon" (click)="toggle()" *ngIf="!showPass"><fa-icon
+                            [icon]="faEyeSlash"></fa-icon></span>
+                        <span class="password-toggle-icon" (click)="toggle()" *ngIf="showPass"><fa-icon
+                            [icon]="faEye"></fa-icon>Hello</span>
+                        <div class="text-danger" *ngIf="
+          signupForm.get('password').errors && signupForm.get('password').touched
+        ">
+                          <p class="text-danger" *ngIf="signupForm.get('password').errors.required">
+                             Password is required
+                          </p>
+                          <p class="text-danger" *ngIf="signupForm.get('password').errors.pattern">
+                            The password must be at least 8 characters long and include at least one special character, one uppercase letter, and one lowercase letter.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="form3Example4cd">Confirm Password</label>
+                        <input type="{{ confirmPassType }}" class="form-control" id="confirmPassword"
+                           formControlName="confirmPassword" [(ngModel)]="confirmPassword" />
+                        <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="!showConfirmPass"><fa-icon
+                            [icon]="faEyeSlash"></fa-icon></span>
+                        <span class="password-toggle-icon" (click)="toggleConfirmPass()" *ngIf="showConfirmPass"><fa-icon
+                            [icon]="faEye"></fa-icon></span>
+                        <div class="text-danger">
+                          <p class="text-danger" *ngIf="
+                                  signupForm.get('confirmPassword').errors &&
+                                  signupForm.get('confirmPassword').touched
+                                ">
+                            
+                            Please re-enter your password
+                          </p>
+                          <p class="text-danger" *ngIf="
+                                  password != confirmPassword &&
+                                  signupForm.get('confirmPassword').touched && !signupForm.get('confirmPassword').errors
+                                ">
+                            
+                            Password not matched
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+  
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button (click)="onSignup()" type="button"
+                        class="btn btn-secondary-black btn-lg gradient-custom-2 ">Register</button>
+                    </div>
+                    <div class="text-center mt-3">
+                      <p>Already have an account?
+                      <a (click)="loginButton()" id="signupLink" style="cursor: pointer; color: var(--accent); text-decoration:underline;">Login</a>
+                      </p>
+                    </div>
+                  </form>
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2 ">
+                  <img
+                    src="https://static.vecteezy.com/system/resources/previews/018/871/720/original/king-and-soldier-chess-pieces-on-transparent-background-leadership-concept-png.png"
+                    class="img-fluid images" style="width:600px; height:600px" alt="logo">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
