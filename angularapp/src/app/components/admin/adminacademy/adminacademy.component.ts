@@ -15,18 +15,17 @@ export class AdminacademyComponent implements OnInit {
   faTrashCan=faTrash;
   faPlus=faSquare;
   faChessBishop=faChessBishop;
-  searchInInput= '';
   adminAcademyGridNumber:number=0;
   
   constructor(private toaster:ToastrService,private router:Router,private auth: AuthService,private academy:AcademyService,private activeRouter:ActivatedRoute){}
   role:string;
-  userID:string;
+  userID:number;
   academies:any=[];
   coursePK:number;
-  
   ngOnInit(){
       this.role=this.auth.getRole();
       this.userID=this.auth.getID();
+
       this.academy.getAcademy().subscribe((val)=>{
        for(let i=0;i<val.length;i++){
           this.academies.push(val[i]);
@@ -37,9 +36,14 @@ export class AdminacademyComponent implements OnInit {
   deleteAcademy(id:number){
     this.academy.deleteAcademy(id).subscribe(res=>{
       this.academy.deleteAcademyCourse(id).subscribe(res=>{
-        this.toaster.success('Academy & its courses deleted successfully','DELETED',{timeOut:3000})
+        this.toaster.warning('Academy & its courses deleted successfully','DELETED',{timeOut:3000})
       })
       location.reload();
     })
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

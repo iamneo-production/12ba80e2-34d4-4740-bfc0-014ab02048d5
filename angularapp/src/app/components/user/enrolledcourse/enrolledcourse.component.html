@@ -1,1 +1,98 @@
-<p>enrolledcourse works!</p>
+<app-user-navbar></app-user-navbar>
+<p
+  class="fs-1 text-center mt-3 p-2 my-2"
+  style="background-color: var(--accent)"
+>
+  ENROLLED COURSES
+</p>
+<div class="input-group w-50 mx-auto mt-4" id="search-bar">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search the course by name..."
+    [(ngModel)]="inputvalue"
+  />
+  <button id="searchCourse" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
+</div>
+<div id="course">
+  <ng-container *ngFor="let enrolledstudentdata of EnrolledStudentData">
+    <ng-container *ngFor="let academy of academies">
+    <ng-container *ngFor="let course of courses | filter : searchInInput : 'courseName'">
+      <div
+        class="card"
+        *ngIf="
+          loginID == enrolledstudentdata.userID &&
+          course.courseId == enrolledstudentdata.courseID && course.instituteID==academy.instituteId
+        "
+      > 
+
+      <div class="card-header text-center fs-5 fw-bolder text-uppercase">
+        {{ academy.instituteName }}
+      </div>
+        <div class="card-header text-center fs-5 fw-light text-uppercase">
+          {{ course.courseName }}
+        </div>
+        <div class="card-body">
+          <div class="row row-cols-2 mx-3 my-2 fw-light">
+            <div class="col">
+              <p class="card-text">
+                Joined Date: {{enrolledstudentdata.joiningDate }}
+              </p>
+            </div>
+            <div class="col text-end">
+              <p class="card-text">Expiry Date: {{enrolledstudentdata.endDate}}</p>
+            </div>
+          </div>
+          <div class="row row-cols-2 mx-3 my-2 fw-light">
+            <div class="col">
+              <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+              (click)="fetchinstituteId(academy.instituteId)">
+                Give Feedback
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Your Feedback Help Us To Improve</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                      <form [formGroup]="feedbackForm">
+                      <div class="input-group mb-3">
+                        <div class="form-floating">
+                          <textarea
+                          id="courseDescription"
+                            type="text"
+                            class="form-control"
+                            placeholder="academydescription"
+                            style="height: 150px"
+                          ></textarea>
+                          <label class="form-label">Comment</label>
+                        </div>
+                      </div>
+                     <ngb-rating [max]="5" formControlName="rating"></ngb-rating>
+                     </form>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn button" data-bs-dismiss="modal">Not now</button>
+                      <button type="button" class="btn button" data-bs-dismiss="modal" (click)="onSubmitFeedback()">Submit </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col text-end">
+              <a routerLink="/user/editAdmission/{{enrolledstudentdata.id}}"><fa-icon class="edit m-2" [icon]="faPenToSquare"></fa-icon></a>
+              <a ><fa-icon class="delete" (click)="onDelete(enrolledstudentdata.id,course.courseId)" [icon]="faTrashCan"></fa-icon></a>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>
+<app-user-footer></app-user-footer>

@@ -1,61 +1,65 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="mt-5">
-  <p id="welcome" class="p-2 text-center fs-3">
-    Login Please
-    <fa-icon class="fs-1 ms-2" [icon]="faChessKnight"></fa-icon>
-  </p>
-  <div class="input-group mb-3">
-    <span class="input-group-text"
-      ><fa-icon [icon]="faEnvelope"></fa-icon
-    ></span>
-    <div class="form-floating">
-      <input
-        type="email"
-        class="form-control"
-        placeholder="Email"
-        formControlName="email"
-      />
-      <label class="form-label">Email</label>
+<section class="h-100 gradient-form " style="background-color: #ffffff;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="card-body p-md-5 mx-md-4">
+
+                <div class="image">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLqPgU9elcYkgfWwgHkp-F3fxCER8ky_QC4_yLBSO4PQX9QUXXxwkY1BOIgHQlbxKx9ek&usqp=CAU"
+                    style="width: 185px; top:0%;" alt="logo">
+                  <h2 class="mt-1 mb-5 pb-1 text-center">Welcome to the Chess Academy Portal Login</h2>
+                </div>
+                <form [formGroup]="loginForm">
+                <div class="textalign">
+                  <p>Please login to your account</p>
+                </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example11">Email</label>
+                    <input type="email" id="form2Example11" formControlName="email" class="form-control"
+                      placeholder="Email" />
+                      <div *ngIf="loginForm.get('email').errors && loginForm.get('email').touched" class="text-danger">
+                        <div *ngIf="loginForm.get('email').errors.required">Please Enter your Email</div>
+                        <div *ngIf="loginForm.get('email').errors.email">Please Enter a Valid Email</div>
+                      </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Password</label>
+                    <input type="password" id="form2Example22" formControlName="password" class="form-control"
+                    placeholder="Password" />
+                    <div *ngIf="loginForm.get('password').errors && loginForm.get('password').touched" class="text-danger">
+                      <div *ngIf="loginForm.get('password').errors.required">Please Enter your Password</div>
+                    </div>
+                  </div>
+
+                  <div class="text-center pt-2 pb-2">
+                    <button   class="btn btn-primary btn-block fa-lg gradient-custom-3 mb-3" (click)="onLogin()" type="button">Log
+                      in</button><br>
+                  </div>
+                    <p>
+                      Don't have an account?
+                      <a (click)="signupLink()" id="signupLink" style="cursor: pointer; color: var(--accent); text-decoration:underline;">Sign up</a>
+                    </p>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="text-balck px-3 py-4 p-md-5 mx-md-4">
+                <h4 class="mb-4">"Step into Success: Join Our Exclusive Community"
+                </h4>
+                <p class="small mb-0">Welcome to the Chess Academy Admission Application!!</p>  
+                     <p class="small mb-0">We appreciate your interest in joining our prestigious chess academy admission portal.
+                     The Chess Academy admission application is a comprehensive process designed to identify and enroll in the courses for the aspiring chess players 
+                     who are passionate about the game and committed to honing their skills. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div
-    class="error"
-    *ngIf="loginForm.get('email').errors && loginForm.get('email').touched"
-  >
-    <p *ngIf="loginForm.get('email').errors.required">
-      <fa-icon [icon]="faTriangleExclamation"></fa-icon>Please enter your email
-      !
-    </p>
-  </div>
-  <div class="input-group mb-3">
-    <span class="input-group-text"><fa-icon [icon]="faLock"></fa-icon></span>
-    <div class="form-floating">
-      <input
-        type="{{ passType }}"
-        class="form-control"
-        id="password"
-        placeholder="Password"
-        formControlName="password"
-      />
-      <span class="password-toggle-icon" (click)="toggle()" *ngIf="!show"
-        ><fa-icon [icon]="faEyeSlash"></fa-icon
-      ></span>
-      <span class="password-toggle-icon" (click)="toggle()" *ngIf="show"
-        ><fa-icon [icon]="faEye"></fa-icon
-      ></span>
-      <label for="password" class="form-label">Password</label>
-    </div>
-  </div>
-  <div
-    class="error"
-    *ngIf="
-      loginForm.get('password').errors && loginForm.get('password').touched
-    "
-  >
-    <p *ngIf="loginForm.get('password').errors.required"><fa-icon [icon]="faTriangleExclamation"></fa-icon>Please enter your password !</p>
-  </div>
-  <button type="submit" id="loginButton" class="btn w-100">Login</button>
-  <p class="mt-3">
-    Don't have an account?
-    <a (click)="signupLink()" id="signupLink">Sign up</a>
-  </p>
-</form>
+</section>

@@ -4,7 +4,7 @@
 }
 .navbar {
   box-shadow: rgba(0, 0.3, 0.3, 0.25) 1.95px 1.95px 2.6px;
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: transparent;
 }
 .navbar-brand {
