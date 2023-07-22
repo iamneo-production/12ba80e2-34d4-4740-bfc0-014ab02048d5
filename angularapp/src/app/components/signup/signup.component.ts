@@ -2,17 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-  faEye,
-  faEyeSlash,
-  faExclamationTriangle,
-  faEnvelope,
-  faLock,
-  faChessKing,
-  faUser,
-  faMobile,
-} from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -23,18 +14,11 @@ export class SignupComponent implements OnInit {
   confirmPassword: String;
   password: string;
   isMatched: boolean = true;
-  faChessKing = faChessKing;
-  faTriangleExclamation = faExclamationTriangle;
-  faEnvelope = faEnvelope;
-  faUser = faUser;
-  faMobile = faMobile;
-  faLock = faLock;
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
   showPass: boolean = false;
   showConfirmPass: boolean = false;
   passType: string = 'password';
   confirmPassType: string = 'password';
+  faEye=faEye;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -43,20 +27,32 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.signupForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
-      username: new FormControl(null),
+      password: new FormControl(null, [Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\s]).{8,}$/)]),
+      username: new FormControl(null,[Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z0-9]+$/)]),
       userRole: new FormControl('user'),
       mobileNumber: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(/^\d{10}$/),
+        Validators.required, this.validateMobileNumber,
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
-    });
+    }
+      );
   }
 
+  validateMobileNumber(control: FormControl): { [key: string]: any } | null {
+    const mobileNumber = control.value;
+  
+    if (
+      mobileNumber &&
+      (mobileNumber.length === 10) &&                     
+      (['6', '8', '9','7'].includes(mobileNumber.charAt(0))) && 
+                        // Check for no repeated digits
+      !/^(\d)\1{9}$/.test(mobileNumber)                     
+    ) {
+      return null; // Valid mobile number
+    } else {
+      return { invalidMobileNumber: true }; // Invalid mobile number
+    }
+  }
   onSignup() {
     if (this.signupForm.valid) {
       if (this.signupForm.get('userRole').value == 'user') {
@@ -67,6 +63,7 @@ export class SignupComponent implements OnInit {
           },
           error: (err) => {
             this.notif.error('Error', 'Email already registered!!!', { timeOut: 3000 });
+            console.log(err);
           },
         });
       } else if (this.signupForm.get('userRole').value == 'admin') {
@@ -80,8 +77,8 @@ export class SignupComponent implements OnInit {
           },
         });
       }
-    }else if(this.signupForm.invalid){
-      this.notif.error('Form is not valid', 'Invalid Deatils', { timeOut: 3000 });
+    }else{
+      this.signupForm.markAllAsTouched();
     }
   }
   loginButton() {

@@ -132,3 +132,6 @@
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/ref/WebApp.dll
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.pdb
 /home/coder/project/workspace/dotnetapp/WebApp/obj/Debug/net5.0/WebApp.genruntimeconfig.cache
+/home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/MailKit.dll
+/home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/MimeKit.dll
+/home/coder/project/workspace/dotnetapp/WebApp/bin/Debug/net5.0/BouncyCastle.Crypto.dll
