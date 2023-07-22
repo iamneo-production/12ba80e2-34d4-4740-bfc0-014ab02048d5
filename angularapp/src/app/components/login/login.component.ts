@@ -1,16 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  faChessQueen,
-  faChessKing,
-  faEyeSlash,
-  faEye,
-  faChessKnight,
-  faEnvelope,
-  faLock,
-  faExclamationTriangle,
-} from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -20,14 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  faChessKnight = faChessKnight;
-  faEnvelope = faEnvelope;
-  faLock = faLock;
-  faEye = faEye;
-  faEyeSlash = faEyeSlash;
-  faTriangleExclamation = faExclamationTriangle;
-  faChessKing = faChessKing;
-  faChessQueen = faChessQueen;
   show: boolean = false;
   passType: string = 'password';
   loginForm: FormGroup;
@@ -39,45 +21,44 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required]),
     });
   }
   onLogin() {
     if (this.loginForm.valid) {
-      try {
-        this.auth.userLogin(this.loginForm.value).subscribe((res) => {
-          this.notif.success('Success', res.Message, { timeOut: 5000 });
-          this.auth.storeToken(res.token);
-          console.log('login to user dashboard');
-        });
-      } catch (error) {
-        console.log('ok you r not a user');
-      }
-      try {
-        this.auth.adminLogin(this.loginForm.value).subscribe((res) => {
-          this.notif.success('Admin Logged in', res.Message, { timeOut: 5000 });
-          this.auth.storeToken(res.token);
-          this.router.navigate(['admin/viewInstitutes']);
-        });
-      } catch (error) {
-        console.log('not a admin'+error);
-      }
-    }else{
-      this.notif.error('Wrong email or password','ERROR!!!',{timeOut:3000});
+      this.auth.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          this.loginForm.reset();
+          this.auth.storeToken(res.token);  
+          if (this.auth.getRole() === 'admin') {
+            this.router.navigate(['/admin/viewInstitutes']);
+            this.notif.success('SUCCESS', 'Admin logged in successfully', { timeOut: 3000 });
+          } else {
+            this.router.navigate(['/user/login']);
+            this.notif.success('SUCCESS', 'User logged in successfully', { timeOut: 3000 });
+          }
+        },
+        error: (err) => {
+          this.notif.error('Error', 'Incorrect email and password', {
+            timeOut: 3000,
+          });
+        },
+      });
+    } else {
+      this.loginForm.markAllAsTouched();
     }
   }
-  signupLink(){
+  signupLink() {
     this.router.navigate(['/signup']);
   }
-  toggle(){
-    if(this.show){
-       this.show=false;
-       this.passType="password";
-    }
-    else {
-      this.show=true;
-      this.passType="text";
+  toggle() {
+    if (this.show) {
+      this.show = false;
+      this.passType = 'password';
+    } else {
+      this.show = true;
+      this.passType = 'text';
     }
   }
 }
