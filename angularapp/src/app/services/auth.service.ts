@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   constructor(private http:HttpClient,private router:Router) { }
-  private baseURL:string="https://8080-ecaffdaacfaecfeafbbfadbbbebdcecdaababeda.project.examly.io";
+  private baseURL:string="https://8080-ecaffdaacfaecfeafbbfadbbbebdcbbbbcfcaaed.project.examly.io";
   userRegister(data:any){
     return this.http.post<any>(`${this.baseURL}/user/signup`,data);
   }

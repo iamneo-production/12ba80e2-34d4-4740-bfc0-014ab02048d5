@@ -38,7 +38,7 @@ namespace dotnetapp.Controller{
             return course;
         }
         // PUT: api/Course/5
-        [HttpPut("PutCourse/{id}")]
+        [HttpPut("admin/editCourse/{id}")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
             if (id != course.courseId)
@@ -65,7 +65,7 @@ namespace dotnetapp.Controller{
         }
 
         // POST: api/Course
-        [HttpPost("PostCourse")]
+        [HttpPost("admin/addCourse")]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
             _context.Courses.Add(course);
@@ -74,7 +74,7 @@ namespace dotnetapp.Controller{
         }
 
         // DELETE: api/Course/5
-        [HttpDelete("DeleteCourse/{id}")]
+        [HttpDelete("admin/deleteCourse/{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             var course = await _context.Courses.FindAsync(id);
@@ -117,7 +117,7 @@ namespace dotnetapp.Controller{
 
 
         // PUT: api/Institute/5
-        [HttpPut("PutInstitute/{id}")]
+        [HttpPut("admin/editInstitute/{id}")]
         public async Task<IActionResult> PutInstitute(int id, Institute institute)
         {
             if (id != institute.instituteId)
@@ -144,7 +144,7 @@ namespace dotnetapp.Controller{
         }
 
         // POST: api/Institute
-        [HttpPost("PostInstitute")]
+        [HttpPost("admin/addInstitute")]
        public async Task<ActionResult<Institute>> PostInstitute(Institute institute)
         {
             _context.Institutes.Add(institute);
@@ -153,7 +153,7 @@ namespace dotnetapp.Controller{
             return CreatedAtAction("GetInstitute", new { id = institute.instituteId }, institute);
         }
         // DELETE: api/Institute/5
-        [HttpDelete("DeleteInstitute/{id}")]
+        [HttpDelete("admin/deleteInstitutes/{id}")]
         public async Task<IActionResult> DeleteInstitute(int id)
         {
             var institute = await _context.Institutes.FindAsync(id);
@@ -182,11 +182,77 @@ namespace dotnetapp.Controller{
             return _context.Institutes.Any(e => e.instituteId == id);
      
         }
+        //Admin Student
 
         [HttpGet("admin/ViewStudent")]
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudent()
         {
             return await _context.Students.ToListAsync();
+        }
+
+
+        // PUT: api/Student/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("admin/editStudent/{id}")]
+        public async Task<IActionResult> PutStudent(int id, Student student)
+        {
+            if (id != student.id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(student).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StudentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // POST: api/Student
+        [HttpPost("admin/addStudent")]
+        public async Task<ActionResult<Student>> PostStudent(Student student)
+        {   
+            _context.Students.Add(student);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetStudent", new { id = student.id }, student);
+        }
+
+
+        // DELETE: api/Student/5
+        [HttpDelete("admin/deleteStudent/{id}")]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            var student = await _context.Students.FindAsync(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool StudentExists(int id)
+        {
+            return _context.Students.Any(e => e.id == id);
         }
 
     }
