@@ -16,7 +16,6 @@ import { AcademyService } from 'src/app/services/academy.service';
   styleUrls: ['./view-institute-course.component.css'],
 })
 export class ViewInstituteCourseComponent implements OnInit {
-  searchInInput = '';
   faSearch = faSearch;
   faPenToSquare = faPenSquare;
   faTrashCan = faTrash;
@@ -48,5 +47,11 @@ export class ViewInstituteCourseComponent implements OnInit {
         timeOut: 5000,
       });
     });
+  }
+  
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }

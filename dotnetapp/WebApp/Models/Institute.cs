@@ -12,5 +12,8 @@ namespace WebApp.Models
         public string mobile { get; set; }
         public string email { get; set; }
         public string image { get; set; }
+        public int rating { get; set; }
+        public int userGiveRating { get; set; }
+        public double averageRating { get; set; }
     }
 }

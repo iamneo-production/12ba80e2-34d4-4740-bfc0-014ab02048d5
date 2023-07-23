@@ -6,116 +6,76 @@
   <div class="row">
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faUser"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
         <div class="form-floating">
-          <input
-            type="text"
-            id="academyName"
-            class="form-control"
-            placeholder="academyame"
-            formControlName="instituteName"
-          />
+          <input type="text" id="academyName" class="form-control" placeholder="academyame"
+            formControlName="instituteName" />
           <label class="form-label">Academy Name</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
+      <div class="error" *ngIf="
           addAcademyForm.get('instituteName').errors &&
           addAcademyForm.get('instituteName').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your Academy Name !</p>
+        ">
+
+        <p *ngIf="addAcademyForm.get('instituteName').errors.required"> Please enter your Academy Name !</p>
+        <p *ngIf="addAcademyForm.get('instituteName').errors.pattern"> Special characters are not alllowed !</p>
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faUser"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
         <div class="form-floating">
-          <input
-            type="text"
-            id="contactNumber"
-            class="form-control"
-            placeholder="academycontact"
-            formControlName="mobile"
-          />
+          <input type="text" id="contactNumber" class="form-control" placeholder="academycontact"
+            formControlName="mobile" />
           <label class="form-label">Academy Contact</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
+      <div class="error" *ngIf="
           addAcademyForm.get('mobile').errors &&
           addAcademyForm.get('mobile').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy contact number !</p>
+        ">
+
+        <p *ngIf="addAcademyForm.get('mobile').errors.required"> Please enter your academy contact number !</p>
+        <p *ngIf="addAcademyForm.get('mobile').errors.pattern"> Incorrect format !</p>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faImage"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faImage"></fa-icon></span>
         <div class="form-floating">
-          <input
-            type="text"
-            id="iamgeUrl"
-            class="form-control"
-            placeholder="imageURL"
-            formControlName="image"
-          />
+          <input type="text" id="iamgeUrl" class="form-control" placeholder="imageURL" formControlName="image" />
           <label class="form-label">Image URL</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
+      <div class="error" *ngIf="
           addAcademyForm.get('image').errors &&
           addAcademyForm.get('image').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        ">
+
         <p>Please enter your Image URL !</p>
       </div>
     </div>
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faEnvelope"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faEnvelope"></fa-icon></span>
         <div class="form-floating">
-          <input
-            type="text"
-            id="emailId"
-            class="form-control"
-            placeholder="academyemail"
-            formControlName="email"
-          />
+          <input type="text" id="emailId" class="form-control" placeholder="academyemail" formControlName="email" />
           <label class="form-label"> Academy Email</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
+      <div class="error" *ngIf="
           addAcademyForm.get('email').errors &&
           addAcademyForm.get('email').touched
-        "
-      >
+        ">
         <p *ngIf="addAcademyForm.get('email').errors.required">
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon> Please enter your
+          Please enter your
           academy email !
         </p>
         <p *ngIf="addAcademyForm.get('email').errors.email">
-          <fa-icon [icon]="faTriangleExclamation"></fa-icon> Email format is
+          Email format is
           incorrect!!!
         </p>
       </div>
@@ -124,29 +84,18 @@
   <div class="row">
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faLocation"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faLocation"></fa-icon></span>
         <div class="form-floating">
-          <input
-            type="text"
-            id="academyLocation"
-            class="form-control"
-            placeholder="location"
-            formControlName="instituteAddress"
-          />
+          <input type="text" id="academyLocation" class="form-control" placeholder="location"
+            formControlName="instituteAddress" />
           <label class="form-label">Academy Address</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
+      <div class="error" *ngIf="
           addAcademyForm.get('instituteAddress').errors &&
           addAcademyForm.get('instituteAddress').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your location !</p>
+        ">
+        <p *ngIf="addAcademyForm.get('instituteAddress').errors.required"> Please enter your academy address !</p>
       </div>
     </div>
   </div>
@@ -154,31 +103,20 @@
   <div class="row">
     <div class="col">
       <div class="input-group mb-3">
-        <span class="input-group-text"
-          ><fa-icon [icon]="faBook"></fa-icon
-        ></span>
+        <span class="input-group-text"><fa-icon [icon]="faBook"></fa-icon></span>
         <div class="form-floating">
-          <textarea
-            type="text"
-            id="academyDescription"
-            class="form-control"
-            placeholder="academydescription"
-            formControlName="instituteDescription"
-            style="height: 150px"
-          ></textarea>
+          <textarea type="text" id="academyDescription" class="form-control" placeholder="academydescription"
+            formControlName="instituteDescription" style="height: 150px"></textarea>
           <label class="form-label">Description</label>
         </div>
       </div>
-      <div
-        class="error"
-        *ngIf="
-          addAcademyForm.get('instituteDescription').errors &&
-          addAcademyForm.get('instituteDescription').touched
-        "
-      >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy description !</p>
-      </div>
+      <div class="error" *ngIf="
+      addAcademyForm.get('instituteDescription').errors &&
+      addAcademyForm.get('instituteDescription').touched
+    ">
+
+    <p *ngIf="addAcademyForm.get('instituteDescription').errors.required"> Please enter your academy description !</p>
+  </div>
     </div>
   </div>
   <div class="">

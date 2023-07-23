@@ -11,7 +11,7 @@ import {
   faEnvelope,
   faLock,
   faExclamationTriangle,
-  faChessKing,
+  faClock,
   faUser,
   faMobile,
   faImage,
@@ -40,16 +40,18 @@ export class EditCourseComponent implements OnInit {
   faLocation = faLocationArrow;
   faChessBishop = faChessBishop;
   faBook = faBook;
+  faClock=faClock;
   ngOnInit(): void {
     this.updateCourseForm = new FormGroup({
       courseId: new FormControl(null),
       instituteID: new FormControl(null),
-      courseName: new FormControl(null, [Validators.required]),
-      studentenrolled: new FormControl(null, [Validators.required]),
+      courseName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
+      studentenrolled: new FormControl(null, [Validators.required,Validators.pattern(/^[0-9]+$/)]),
       courseDuration: new FormControl(null, [Validators.required]),
-      timing: new FormControl(null, [Validators.required]),
+      startTime: new FormControl(null, [Validators.required]),
+      endTime: new FormControl(null, [Validators.required]),
       courseDescription: new FormControl(null, [Validators.required]),
-    });
+    },{validators: this.courseTimingValidator });
 
     this.academy
       .getCourse(this.activeRouter.snapshot.params['id'])
@@ -59,11 +61,46 @@ export class EditCourseComponent implements OnInit {
         this.updateCourseForm.get('courseName').setValue(res.courseName);
         this.updateCourseForm.get('studentenrolled').setValue(res.studentenrolled);
         this.updateCourseForm.get('courseDuration').setValue(res.courseDuration);
-        this.updateCourseForm.get('timing').setValue(res.timing);
+        this.updateCourseForm.get('startTime').setValue(res.startTime);
+        this.updateCourseForm.get('endTime').setValue(res.endTime);
         this.updateCourseForm.get('courseDescription').setValue(res.courseDescription);
       });
   }
+
+  courseTimingValidator(formGroup: FormGroup): { [key: string]: any } | null {
+    const startTime = formGroup.get('startTime').value;
+    const endTime = formGroup.get('endTime').value;
+  
+    if (startTime && endTime) {
+      const [startHour, startMinute] = startTime.split(':').map(Number);
+      const [endHour, endMinute] = endTime.split(':').map(Number);
+  
+      const startMinutes = startHour * 60 + startMinute;
+      const endMinutes = endHour * 60 + endMinute;
+  
+      if (endMinutes < startMinutes) {
+        // Handling the case of crossing midnight
+        const timeDifference = (endMinutes + 24 * 60) - startMinutes;
+        const maxTimeGap = 4 * 60; // 4 hours in minutes
+  
+        if (timeDifference > maxTimeGap) {
+          return { maxTimeGapExceeded: true };
+        }
+      } else {
+        const timeDifference = endMinutes - startMinutes;
+        const maxTimeGap = 4 * 60; // 4 hours in minutes
+  
+        if (timeDifference > maxTimeGap) {
+          return { maxTimeGapExceeded: true };
+        }
+      }
+    }
+  
+    return null;
+  }
+
   onUpdateCourse() {
+    if(this.updateCourseForm.valid){
     this.academy
       .updateCourse(
         this.activeRouter.snapshot.params['id'],
@@ -75,5 +112,8 @@ export class EditCourseComponent implements OnInit {
           `admin/viewCourse/${this.updateCourseForm.get('instituteID').value}`,
         ]);
       });
+  }else{
+    this.updateCourseForm.markAllAsTouched();
   }
+}
 }

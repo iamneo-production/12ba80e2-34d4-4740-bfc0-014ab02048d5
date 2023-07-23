@@ -26,8 +26,8 @@ export class AddInstituteComponent implements OnInit {
 
   ngOnInit(){
     this.addAcademyForm=new FormGroup({
-      instituteName:new FormControl(null,[Validators.required]),
-      mobile:new FormControl(null,[Validators.required,Validators.pattern(/^\d{10}$/)]),
+      instituteName:new FormControl(null,[Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
+      mobile:new FormControl(null,[Validators.required,Validators.pattern(/^(?:\+91|0)?[6789]\d{9}$/)]),
       image:new FormControl(null,[Validators.required]),
       email:new FormControl(null,[Validators.required,Validators.email]),
       instituteAddress:new FormControl(null,[Validators.required]),
@@ -46,6 +46,8 @@ export class AddInstituteComponent implements OnInit {
           this.toaster.warning('Error',err.message,{timeOut:3000});
         }
       })
+    }else{
+      this.addAcademyForm.markAllAsTouched();
     }
   }
 

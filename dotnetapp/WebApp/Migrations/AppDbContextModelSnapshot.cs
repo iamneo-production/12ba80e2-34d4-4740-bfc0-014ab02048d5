@@ -14,16 +14,16 @@ namespace WebApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.17")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.17");
 
             modelBuilder.Entity("WebApp.Models.Admin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
@@ -56,7 +56,7 @@ namespace WebApp.Migrations
                     b.Property<int>("courseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("courseDescription")
                         .HasColumnType("nvarchar(max)");
@@ -67,13 +67,16 @@ namespace WebApp.Migrations
                     b.Property<string>("courseName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("endTime")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("instituteID")
                         .HasColumnType("int");
 
-                    b.Property<string>("studentenrolled")
+                    b.Property<string>("startTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("timing")
+                    b.Property<string>("studentenrolled")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("courseId");
@@ -86,7 +89,10 @@ namespace WebApp.Migrations
                     b.Property<int>("instituteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
+
+                    b.Property<double>("averageRating")
+                        .HasColumnType("float");
 
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
@@ -106,6 +112,12 @@ namespace WebApp.Migrations
                     b.Property<string>("mobile")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userGiveRating")
+                        .HasColumnType("int");
+
                     b.HasKey("instituteId");
 
                     b.ToTable("institutes");
@@ -116,7 +128,7 @@ namespace WebApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
@@ -134,7 +146,7 @@ namespace WebApp.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("age")
                         .HasColumnType("nvarchar(max)");
@@ -203,7 +215,7 @@ namespace WebApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");

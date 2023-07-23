@@ -22,9 +22,13 @@ import { AddStudentComponent } from './components/admin/adminstudent/add-student
 import { EditStudentComponent } from './components/admin/adminstudent/edit-student/edit-student.component';
 import { ViewStudentComponent } from './components/admin/adminstudent/view-student/view-student.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import { StudentFilterPipe } from './pipes/student-filter.pipe';
 import { NgxUiLoaderModule, NgxUiLoaderHttpModule} from 'ngx-ui-loader';
-
+import { UserNavbarComponent } from './components/user/user-navbar/user-navbar.component';
+import { UserFooterComponent } from './components/user/user-footer/user-footer.component';
+import { ViewcoursesComponent } from './components/user/viewacademy/viewcourses/viewcourses.component';
+import { AddAdmissionComponent } from './components/user/enrolledcourse/add-admission/add-admission.component';
+import { EditAdmissionComponent } from './components/user/enrolledcourse/edit-admission/edit-admission.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +48,11 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule} from 'ngx-ui-loader';
     EditStudentComponent,
     ViewStudentComponent,
     FilterPipe,
-    StudentFilterPipe,
+    UserNavbarComponent,
+    UserFooterComponent,
+    ViewcoursesComponent,
+    AddAdmissionComponent,
+    EditAdmissionComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +67,7 @@ import { NgxUiLoaderModule, NgxUiLoaderHttpModule} from 'ngx-ui-loader';
     }),
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

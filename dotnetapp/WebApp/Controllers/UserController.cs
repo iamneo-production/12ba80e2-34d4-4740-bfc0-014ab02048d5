@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Models;
 namespace WebApp.Controller{
-    [Route("api/[controller]")]
+    [Route("")]
     [ApiController]
     public class UserController: ControllerBase{ 
          private readonly AppDbContext _context;
@@ -18,14 +18,19 @@ namespace WebApp.Controller{
             _context = context;
         }
         // GET: api/Student
-        [HttpGet]
+        [HttpGet("GetStudents")]
         public async Task<ActionResult<IEnumerable<Student>>> GetStudent()
         {
             return await _context.Students.ToListAsync();
         }
 
+        [HttpGet("user/ViewAdmission")]
+        public async Task<ActionResult<IEnumerable<Student>>> ViewAdmission()
+        {
+            return await _context.Students.ToListAsync();
+        }
         // GET: api/Student/5
-        [HttpGet("{id}")]
+        [HttpGet("GetStudents/{id}")]
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -40,7 +45,7 @@ namespace WebApp.Controller{
 
         // PUT: api/Student/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        [HttpPut("user/editAdmission/{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {
             if (id != student.id)
@@ -70,17 +75,25 @@ namespace WebApp.Controller{
         }
 
         // POST: api/Student
-        [HttpPost]
+        [HttpPost("user/addAdmission")]
         public async Task<ActionResult<Student>> PostStudent(Student student)
-        {
+        {   
             _context.Students.Add(student);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetStudent", new { id = student.id }, student);
         }
+        [HttpPost("checkCourseExists")]
+        public async Task<ActionResult<bool>> CheckCourseExists(checkAlreadyEnrolledCourse obj)
+        {   
+            bool courseExists = await CheckCourseExist(obj.userID, obj.courseID);
+            return courseExists;
+        }
+
 
         // DELETE: api/Student/5
-        [HttpDelete("{id}")]
+        [HttpDelete("user/deleteAdmission/{id}")]
         public async Task<IActionResult> DeleteStudent(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -94,10 +107,20 @@ namespace WebApp.Controller{
 
             return NoContent();
         }
+        [HttpGet("user/viewStatus")]
+        public async Task<ActionResult<IEnumerable<Institute>>> GetInstitute()
+        {
+            return await _context.Institutes.ToListAsync();
+        }
 
         private bool StudentExists(int id)
         {
             return _context.Students.Any(e => e.id == id);
+        }
+
+         private Task<bool> CheckCourseExist(int userID,int courseID )
+        {
+             return (_context.Students.AnyAsync(x => x.userID == userID && x.courseID == courseID));  
         }
     }
 }

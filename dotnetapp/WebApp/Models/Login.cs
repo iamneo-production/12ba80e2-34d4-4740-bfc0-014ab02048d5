@@ -5,5 +5,6 @@ namespace WebApp.Models{
         public int Id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
+        public string Token {get; set;}
     }
 }

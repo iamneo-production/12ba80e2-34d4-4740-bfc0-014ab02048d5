@@ -5,8 +5,10 @@
     id="searchCourse"
     class="form-control"
     placeholder="Search the course by name..."
-    [(ngModel)]="searchInInput"
+    [(ngModel)]="inputvalue"
   />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
 </div>
   <button class="btn fw-bold addcourses" (click)="addCourses()" id="addCourse">
     Add New Courses <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
@@ -15,7 +17,7 @@
 <p class="text-center fw-bold fs-3 allcourses">All Courses</p>
 
   <div  id="course">
-  <ng-container  *ngFor="let course of allCourses | filter : searchInInput;let i=index">
+  <ng-container  *ngFor="let course of allCourses | filter : searchInInput:'courseName';let i=index">
     <ng-container *ngFor="let academy of allAcademy">
       <div class="card" *ngIf="course.instituteID == academy.instituteId">
         <div id="courseGrid{{i}}">
@@ -34,7 +36,7 @@
               <p class="card-text">Students: {{ course.studentenrolled }}</p>
             </div>
             <div class="col">
-              <p class="card-text">Timing: {{ course.timing }}</p>
+              <p class="card-text">Timing: {{ course.startTime }} to {{course.endTime}}</p>
             </div>
             <div class="col text-end">
               <p class="card-text">
@@ -45,13 +47,7 @@
           </div>
           <div class="d-flex justify-content-between mx-4 my-2">
             <div class="mx-1">
-              <button
-                class="btn"
-                id="enrollbutton"
-                routerLink="/admin/addStudent/{{ course.courseId }}"
-              >
-                Enroll
-              </button>
+            
             </div>
             <div class="d-flex">
               <div class="mx-1">
