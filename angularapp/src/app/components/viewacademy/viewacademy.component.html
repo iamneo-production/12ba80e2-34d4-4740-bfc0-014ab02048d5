@@ -1,0 +1,70 @@
+<app-user-navbar></app-user-navbar>
+<div class="container p-2 my-2">
+  <div class="row gap-5 align-center">
+    <div class="col justify-content-center text wrap">
+      <p class="fw-bolder text-start" style="font-size: 60px;">
+        Welcome to our Chess Academy Portal
+      </p>
+      <p class="fw-light" style="text-align: justify;">
+        At our Chess Academy, we believe that chess is more than just a game. It
+        is a timeless art form that combines intellect, strategy, creativity,
+        and resilience. Whether you are a beginner taking your first steps on
+        the 64 squares or a seasoned player seeking to refine your skills, our
+        portal is designed to cater to your specific needs and aspirations. It is a timeless art form that combines
+        intellect, strategy, creativity, and resilience. Whether you are a beginner taking your first steps on the 64
+        squares or a seasoned player seeking to refine your skills, our portal is designed to cater to your specific
+        needs and aspirations.
+      </p>
+    </div>
+    <div class="col m-2">
+      <img class="img-fluid w-100" src="../../../../assets/user-dashboard-hero-img.png" alt="" />
+    </div>
+  </div>
+</div>
+<div id="ourAcademy">
+<p class="h1 text-uppercase text-center academy-heading p-2 my-2 w-100">
+  Our Academies
+</p>
+<div class="input-group w-50 mx-auto m-4" id="search-bar">
+  <input type="text" class="form-control" placeholder="Search the academy by name..." [(ngModel)]="inputvalue" />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
+</div>
+<div class="container-fluid cards">
+  <div class="row">
+    <div class="col-lg-4 mb-4" *ngFor="let academy of academies | filter : searchInInput:'instituteName'">
+      <div id="card">
+        <a href="" routerLink="/user/viewStatus/{{ academy.instituteId }}">
+          <img src="{{ academy.image }}" alt="" class="card-img-top" style="height: 100%" />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ academy.instituteName }}</h5>
+          <div class="">
+            <div>
+              <div class="d-flex justify-content-between mt-4 w-100" style="align-items: center;">
+                <div>
+                  <p
+                  class="card-text text-justify lh-1 fs-6 fst-italic text-wrap"
+                  style="text-align: justify; text-justify: inter-word"
+                >
+                  Description: {{ academy.instituteDescription }}
+                </p>
+                </div>
+                <div>
+                  <ngb-rating [max]="5" [(rate)]="academy.averageRating" [readonly]="true"></ngb-rating>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-4 w-100">
+                <div>
+                  <p>Place: {{ academy.instituteAddress }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<app-user-footer></app-user-footer>
