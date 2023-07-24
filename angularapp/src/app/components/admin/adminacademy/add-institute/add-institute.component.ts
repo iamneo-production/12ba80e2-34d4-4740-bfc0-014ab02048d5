@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AcademyService } from 'src/app/services/academy.service';
-import { faBook,faChessBishop,faLocationArrow,faChessKnight,faEnvelope,faLock,faExclamationTriangle,faChessKing,faUser,faMobile,faImage } from '@fortawesome/free-solid-svg-icons';
+import { faBook,faChessBishop,faLocationArrow,faChessKnight,faEnvelope,faLock,faExclamationTriangle,faUser,faMobile,faImage } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-add-institute',

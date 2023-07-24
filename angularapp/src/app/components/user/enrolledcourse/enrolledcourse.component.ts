@@ -7,7 +7,7 @@ import {
   faPenSquare,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { AcademyService } from 'src/app/services/academy.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -100,10 +100,9 @@ export class EnrolledcourseComponent implements OnInit{
         let instituteUserGiveRating=res.userGiveRating+1;
         let instituteRating=this.feedbackForm.get('rating').value+res.rating;
         let averageRating= instituteRating/instituteUserGiveRating;
-        averageRating.toFixed(2);
         this.feedbackForm.get('rating').setValue(instituteRating);
         this.feedbackForm.get('userGiveRating').setValue(instituteUserGiveRating);
-        this.feedbackForm.get('averageRating').setValue(averageRating);
+        this.feedbackForm.get('averageRating').setValue(averageRating.toFixed(2));
         this.feedbackForm.get('instituteId').setValue(this.instituteId);
         this.feedbackForm.get('instituteName').setValue(res.instituteName);
         this.feedbackForm.get('mobile').setValue(res.mobile);

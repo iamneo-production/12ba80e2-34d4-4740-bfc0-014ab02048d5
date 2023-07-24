@@ -1,9 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AcademyService } from 'src/app/services/academy.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { faChessBishop,faSearch,faPenSquare,faTrash,faSquare } from '@fortawesome/free-solid-svg-icons';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-viewacademy',
   templateUrl: './viewacademy.component.html',

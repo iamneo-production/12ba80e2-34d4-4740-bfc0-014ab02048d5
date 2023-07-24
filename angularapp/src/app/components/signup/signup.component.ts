@@ -11,7 +11,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
-  confirmPassword: String;
+  confirmPassword: string;
   password: string;
   isMatched: boolean = true;
   showPass: boolean = false;

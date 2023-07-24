@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators,ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AcademyService } from 'src/app/services/academy.service';
@@ -37,7 +37,6 @@ export class AddCourseComponent implements OnInit {
       courseName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
       studentenrolled: new FormControl(null, [Validators.required,Validators.pattern(/^(?!0+$)\d+$/)]),
       courseDuration: new FormControl(null, [Validators.required]),
-      // timing: new FormControl(null, [Validators.required]),
       startTime: new FormControl ('', Validators.required),
       endTime: new FormControl ('', Validators.required),
       courseDescription: new FormControl(null, [Validators.required]),
@@ -59,16 +58,15 @@ export class AddCourseComponent implements OnInit {
       const endMinutes = endHour * 60 + endMinute;
   
       if (endMinutes < startMinutes) {
-        // Handling the case of crossing midnight
         const timeDifference = (endMinutes + 24 * 60) - startMinutes;
-        const maxTimeGap = 4 * 60; // 4 hours in minutes
+        const maxTimeGap = 4 * 60;
   
         if (timeDifference > maxTimeGap) {
           return { maxTimeGapExceeded: true };
         }
       } else {
         const timeDifference = endMinutes - startMinutes;
-        const maxTimeGap = 4 * 60; // 4 hours in minutes
+        const maxTimeGap = 4 * 60;
   
         if (timeDifference > maxTimeGap) {
           return { maxTimeGapExceeded: true };

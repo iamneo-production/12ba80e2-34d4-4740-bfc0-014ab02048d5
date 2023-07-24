@@ -39,7 +39,7 @@ export class AddStudentComponent implements OnInit {
   faEyeSlash = faEyeSlash;
   passType: string = '';
   confirmPassType: string = '';
-  confirmPassword: String;
+  confirmPassword: string;
   password: string;
   showPass: boolean = false;
   showConfirmPass: boolean = false;
