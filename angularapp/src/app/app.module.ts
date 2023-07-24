@@ -8,13 +8,15 @@ import { LoginComponent } from './components/login/login.component';
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { AdminComponent } from './admin/admin.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent,
-    AdminComponent
+    LoginComponent
+    
+  
   ],
   imports: [
     BrowserModule,
