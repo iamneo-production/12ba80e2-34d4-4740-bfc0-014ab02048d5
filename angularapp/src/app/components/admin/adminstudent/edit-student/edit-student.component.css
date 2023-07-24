@@ -29,10 +29,9 @@ form {
       border-radius: 10px;
       margin: 1rem;
   }
-  .updateStudent{
-    background-color: var(--accent);
-  }
+ 
   .updateStudent {
+    background-color: var(--accent);
     box-shadow: rgba(0, 0.3, 0.3, 0.25) 1.95px 1.95px 2.6px;
     border: none;
     padding: 0.7rem;
