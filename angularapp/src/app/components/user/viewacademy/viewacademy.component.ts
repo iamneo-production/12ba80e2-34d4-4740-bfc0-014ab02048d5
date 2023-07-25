@@ -19,11 +19,10 @@ export class ViewacademyComponent implements OnInit {
   ngOnInit(){
       this.userID=this.auth.getID();
       this.academy.getAcademy().subscribe((val)=>{
-       for(let i=0;i<val.length;i++){
-          this.academies.push(val[i]);
-       }
-      })
-     
+        for (const element of val) {
+          this.academies.push(element);
+        }        
+      })  
   }
   inputvalue= '';
   searchInInput = '';

@@ -46,7 +46,7 @@ export class EditCourseComponent implements OnInit {
       courseId: new FormControl(null),
       instituteID: new FormControl(null),
       courseName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
-      studentenrolled: new FormControl(null, [Validators.required,Validators.pattern(/^[0-9]+$/)]),
+      studentenrolled: new FormControl(null, [Validators.required, Validators.pattern(/^\d+$/)]),
       courseDuration: new FormControl(null, [Validators.required]),
       startTime: new FormControl(null, [Validators.required]),
       endTime: new FormControl(null, [Validators.required]),
