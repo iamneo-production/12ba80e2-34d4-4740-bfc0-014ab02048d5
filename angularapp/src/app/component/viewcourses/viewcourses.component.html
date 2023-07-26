@@ -1,0 +1,56 @@
+<app-user-navbar></app-user-navbar>
+<div class="input-group w-50 mx-auto mt-4" id="search-bar">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search the course by name..."
+    [(ngModel)]="inputvalue"
+  />
+  <button id="searchButton" class="btn" style="background-color: var(--accent); width: 70px;" type="click" (click)="onSearch()"><fa-icon [icon]="faSearch" style="transition: all 0.5s;
+    color: var(--primary); font-size: 20px;"></fa-icon></button>
+</div>
+<p class="text-center fw-bold fs-3 mt-3 allcourses">{{academyname}} Courses</p>
+<div id="course">
+  <ng-container *ngFor="let course of allCourses | filter : searchInInput:'courseName'">
+    <div class="card" *ngIf="course.instituteID == Instituteid">
+      <div class="card-header text-center fs-3 fw-bold text-uppercase">
+        {{ course.courseName }}
+      </div>
+      <div class="card-body">
+        <div class="row row-cols-2 mx-3 my-2 fw-light">
+          <div class="col">
+            <p class="card-text">Duration: {{ course.courseDuration }} months</p>
+          </div>
+          <div class="col text-end">
+            <p class="card-text">Students: {{ course.studentenrolled }}</p>
+          </div>
+          <div class="col">
+            <p class="card-text">Timing: {{ course.startTime }} to {{course.endTime}}</p>
+          </div>
+          <div class="col text-end">
+            <p class="card-text">
+              Description:
+              <span class="fst-italic lh-1">{{ course.courseDescription }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mx-4 my-2">
+          <div class="mx-1">
+            <button
+              class="btn"
+              id="enrollbutton"
+              (click)="checkAlreadyEnrolled(course.courseId)"
+              *ngIf="course.studentenrolled>0; else elseblock"
+            >
+              Enroll
+            </button>
+            <ng-template #elseblock>
+              <p class="fs-5 text-danger fw-bold text-center">Seats for this course is already full.</p> 
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<app-user-footer></app-user-footer>
