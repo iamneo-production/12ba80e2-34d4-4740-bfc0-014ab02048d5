@@ -32,7 +32,7 @@ namespace dotnetapp
            // services.AddDbContext<ProductDBContext>(opt => opt.UseSqlServer(connectionString));
            // services.AddScoped<IProductService, ProductService>();
             services.AddCors();
-
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myconnstring")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
