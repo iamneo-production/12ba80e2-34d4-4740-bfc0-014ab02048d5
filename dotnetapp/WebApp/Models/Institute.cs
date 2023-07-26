@@ -1,0 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+namespace WebApp.Models
+{
+    public class Institute
+    {
+        [Key]
+        public int instituteId { get; set; }
+        public string instituteName { get; set; }
+        public string instituteDescription { get; set; }
+        public string instituteAddress { get; set; }
+        public string mobile { get; set; }
+        public string email { get; set; }
+        public string image { get; set; }
+    }
+}

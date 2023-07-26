@@ -10,6 +10,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+<<<<<<< HEAD
+=======
+using WebApp.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
+>>>>>>> b60f359301f25084d210226d7817a8c2e71e28e6
 
 namespace WebApp
 {
@@ -19,15 +28,45 @@ namespace WebApp
         {
             Configuration = configuration;
         }
+<<<<<<< HEAD
 
         public IConfiguration Configuration { get; }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+=======
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddAuthorization();
+            services.AddControllers(); 
+            services.AddSwaggerGen(); 
+            services.AddSwaggerGen(c =>{c.SwaggerDoc("v2", new OpenApiInfo { Title = "WebApp", Version = "v2" });});
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnStr")));
+            services.AddCors(options =>{options.AddPolicy("CorsPolicy", builder =>{builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();});});
+            services.AddAuthentication(x=>{
+                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>{
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("veryverysecret.....")),
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                    };
+            });
+        }
+        public IConfiguration Configuration { get; }
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {   
+>>>>>>> b60f359301f25084d210226d7817a8c2e71e28e6
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+<<<<<<< HEAD
 
             app.UseHttpsRedirection();
 
@@ -39,6 +78,17 @@ namespace WebApp
             {
                 endpoints.MapControllers();
             });
+=======
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseSwagger();  
+            app.UseSwaggerUI(c =>{c.SwaggerEndpoint("/swagger/v2/swagger.json", "WebApp");});
+            app.UseEndpoints(endpoints =>{endpoints.MapControllers();});
+            
+>>>>>>> b60f359301f25084d210226d7817a8c2e71e28e6
         }
     }
 }
