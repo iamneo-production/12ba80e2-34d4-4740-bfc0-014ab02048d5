@@ -11,7 +11,7 @@ using dotnetapp.Context;
 namespace dotnetapp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230724161503_tablesAdded")]
+    [Migration("20230726044405_tablesAdded")]
     partial class tablesAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
