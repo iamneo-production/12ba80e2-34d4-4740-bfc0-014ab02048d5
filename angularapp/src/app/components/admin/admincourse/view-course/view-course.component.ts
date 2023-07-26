@@ -18,7 +18,6 @@ export class ViewCourseComponent implements OnInit {
   Instituteid: number;
   allCourses = [];
   allAcademy = [];
-  searchInInput = '';
   faSearch = faSearch;
   faPenToSquare = faPenSquare;
   faTrashCan = faTrash;
@@ -57,5 +56,10 @@ export class ViewCourseComponent implements OnInit {
       });
       location.reload();
     });
+  }
+  inputvalue= '';
+  searchInInput = '';
+  onSearch(){
+    this.searchInInput=this.inputvalue;
   }
 }
