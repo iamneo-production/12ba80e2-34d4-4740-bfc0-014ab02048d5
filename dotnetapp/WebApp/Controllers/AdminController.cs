@@ -192,7 +192,6 @@ namespace WebApp.Controller{
 
 
         // PUT: api/Student/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("admin/editStudent/{id}")]
         public async Task<IActionResult> PutStudent(int id, Student student)
         {

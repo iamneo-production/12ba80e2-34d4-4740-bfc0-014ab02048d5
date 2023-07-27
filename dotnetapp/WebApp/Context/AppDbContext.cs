@@ -19,8 +19,6 @@ namespace WebApp.Context{
             modelBuilder.Entity<Institute>().ToTable("institutes");
             modelBuilder.Entity<Login>().ToTable("logins");
             modelBuilder.Entity<Student>().ToTable("students");
-
-
         }
     }
 }
