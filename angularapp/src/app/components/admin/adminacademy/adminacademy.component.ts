@@ -27,9 +27,9 @@ export class AdminacademyComponent implements OnInit {
       this.userID=this.auth.getID();
 
       this.academy.getAcademy().subscribe((val)=>{
-        for (const element of val) {
-          this.academies.push(element);
-        }        
+       for(let i=0;i<val.length;i++){
+          this.academies.push(val[i]);
+       }
       })
   }
 

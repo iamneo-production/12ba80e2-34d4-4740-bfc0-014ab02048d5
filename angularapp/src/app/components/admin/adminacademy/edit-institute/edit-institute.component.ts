@@ -1,8 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AcademyService } from 'src/app/services/academy.service';
+import { ActivatedRoute } from '@angular/router';
 import {
   faBook,
   faChessBishop,
