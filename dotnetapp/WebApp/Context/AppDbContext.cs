@@ -10,7 +10,6 @@ namespace WebApp.Context{
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             
-            modelBuilder.Entity<Admin>().ToTable("admins");
             modelBuilder.Entity<Institute>().ToTable("institutes");
             
 
