@@ -42,33 +42,7 @@ namespace WebApp.Controller{
         }
 
 
-        // PUT: api/Institute/5
-        [HttpPut("PutInstitute/{id}")]
-        public async Task<IActionResult> PutInstitute(int id, Institute institute)
-        {
-            if (id != institute.instituteId)
-            {
-                return BadRequest();
-            }
-            _context.Entry(institute).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InstituteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return NoContent();
-        }
-
+        
         // POST: api/Institute
         [HttpPost("PostInstitute")]
         public async Task<ActionResult<Institute>> PostInstitute(Institute institute)
@@ -78,18 +52,34 @@ namespace WebApp.Controller{
 
             return CreatedAtAction("GetInstitute", new { id = institute.instituteId }, institute);
         }
-        // DELETE: api/Institute/5
-        [HttpDelete("DeleteInstitute/{id}")]
-        public async Task<IActionResult> DeleteInstitute(int id)
+        [HttpPut("admin/editStudent/{id}")]
+        public async Task<IActionResult> PutStudent(int id, Student student)
         {
-            var institute = await _context.Institutes.FindAsync(id);
-            if (institute == null)
+            if (id != student.id)
             {
-                return NotFound();
+                return BadRequest();
             }
-            _context.Institutes.Remove(institute);
-            await _context.SaveChangesAsync();
+
+            _context.Entry(student).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StudentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return NoContent();
+        }
         }
     }
 }
