@@ -25,7 +25,6 @@ export class ViewCourseComponent implements OnInit {
   constructor(
     private router: Router,
     private toaster: ToastrService,
-    private activeRouter: ActivatedRoute,
     private academy: AcademyService
   ) {}
   ngOnInit() {

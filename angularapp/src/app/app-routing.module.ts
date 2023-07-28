@@ -25,7 +25,6 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
   {path:'user-navbar',component:UserNavbarComponent,canActivate:[AuthGuard]},
-  
 
   {path:'admin/viewInstitutes',component:AdminacademyComponent,canActivate:[AuthGuard]},
   {path:'admin/addInstitute',component:AddInstituteComponent,canActivate:[AuthGuard]},
