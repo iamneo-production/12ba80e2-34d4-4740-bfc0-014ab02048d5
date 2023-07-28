@@ -6,7 +6,6 @@ namespace WebApp.Context{
 
         }
         
-        public DbSet<Admin> Admins{get; set;}
         public DbSet<Institute> Institutes{get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
