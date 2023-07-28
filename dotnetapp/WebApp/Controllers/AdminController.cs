@@ -15,31 +15,11 @@ namespace WebApp.Controller{
     [ApiController]
     public class AdminController: ControllerBase{ 
         private readonly AppDbContext _context;
-        //InstituteController
-
-
-        // GET: api/Institute
-        [HttpGet("admin/viewInstitutes")]
-        public async Task<ActionResult<IEnumerable<Institute>>> GetInstitute()
+        
+         public AdminController(AppDbContext context)
         {
-            return await _context.Institutes.ToListAsync();
+            _context = context;
         }
-
-        // GET: api/Institute/5
-        [HttpGet("GetInstituteID/{id}")]
-        public async Task<ActionResult<Institute>> GetInstitute(int id)
-        {
-            var institute = await _context.Institutes.FindAsync(id);
-
-            if (institute == null)
-            {
-                return NotFound();
-            }
-
-            return institute;
-        }
-
-
         // PUT: api/Institute/5
         [HttpPut("admin/editInstitute/{id}")]
         public async Task<IActionResult> PutInstitute(int id, Institute institute)
@@ -66,29 +46,5 @@ namespace WebApp.Controller{
             }
             return NoContent();
         }
-
-        // POST: api/Institute
-        [HttpPost("admin/addInstitute")]
-       public async Task<ActionResult<Institute>> PostInstitute(Institute institute)
-        {
-            _context.Institutes.Add(institute);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetInstitute", new { id = institute.instituteId }, institute);
-        }
-        // DELETE: api/Institute/5
-        [HttpDelete("admin/deleteInstitutes/{id}")]
-        public async Task<IActionResult> DeleteInstitute(int id)
-        {
-            var institute = await _context.Institutes.FindAsync(id);
-            if (institute == null)
-            {
-                return NotFound();
-            }
-            _context.Institutes.Remove(institute);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-        
     }
 }
