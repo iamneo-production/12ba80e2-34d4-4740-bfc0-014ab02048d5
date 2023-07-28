@@ -43,17 +43,21 @@ export class EditInstituteComponent implements OnInit {
   ngOnInit() {
     this.updateAcademyForm = new FormGroup({
       instituteId: new FormControl(),
-      instituteName: new FormControl(null, [Validators.required]),
-      mobile: new FormControl(null, [Validators.required]),
+      instituteName: new FormControl(null, [Validators.required,Validators.pattern(/^[a-zA-Z0-9\s]+$/)]),
+      mobile: new FormControl(null, [Validators.required,Validators.pattern(/^(?:\+91|0)?[6789]\d{9}$/)]),
       image: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required,Validators.email]),
       instituteAddress: new FormControl(null, [Validators.required]),
       instituteDescription: new FormControl(null, [Validators.required]),
+      rating: new FormControl(0),
+      userGiveRating: new FormControl(0),
+      averageRating: new FormControl(0),
     });
-    console.log(this.activeRouter.snapshot.params['id']);
+    
     this.academy
       .getAcademyById(this.activeRouter.snapshot.params['id'])
       .subscribe((res) => {
+        console.log(res);
         this.updateAcademyForm
           .get('instituteId')
           .setValue(this.activeRouter.snapshot.params['id']);
@@ -63,10 +67,15 @@ export class EditInstituteComponent implements OnInit {
         this.updateAcademyForm.get('email').setValue(res.email);
         this.updateAcademyForm.get('instituteAddress').setValue(res.instituteAddress);
         this.updateAcademyForm.get('instituteDescription').setValue(res.instituteDescription);
+        this.updateAcademyForm.get('rating').setValue(res.rating);
+        this.updateAcademyForm.get('userGiveRating ').setValue(res.userGiveRating);
+        this.updateAcademyForm.get('averageRating ').setValue(res.averageRating );
       });
+      
   }
   onUpdateAcademy() {
     if (this.updateAcademyForm.valid) {
+      console.log(this.updateAcademyForm.value);
       this.academy
         .updateAcademy(
           this.activeRouter.snapshot.params['id'],
@@ -79,7 +88,7 @@ export class EditInstituteComponent implements OnInit {
           });
         });
     } else {
-      this.toaster.error('Error', 'Something went wrong', { timeOut: 2000 });
+      this.updateAcademyForm.markAllAsTouched();
     }
   }
 }
