@@ -30,8 +30,8 @@
           updateAcademyForm.get('instituteName').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your Academy Name !</p>
+        <p *ngIf="updateAcademyForm.get('instituteName').errors.required"> Please enter your Academy Name !</p>
+        <p *ngIf="updateAcademyForm.get('instituteName').errors.pattern"> Special characters are not allowed !</p>
       </div>
     </div>
     <div class="col">
@@ -57,8 +57,9 @@
           updateAcademyForm.get('mobile').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy contact number !</p>
+        
+        <p *ngIf="updateAcademyForm.get('mobile').errors.required"> Please enter your academy contact number !</p>
+        <p *ngIf="updateAcademyForm.get('mobile').errors.pattern"> Mobile number format is incorrect !</p>
       </div>
     </div>
   </div>
@@ -86,7 +87,7 @@
           updateAcademyForm.get('image').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your Image URL !</p>
       </div>
     </div>
@@ -113,8 +114,8 @@
           updateAcademyForm.get('email').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-        <p>Please enter your academy email !</p>
+        <p *ngIf="updateAcademyForm.get('email').errors.required"> Please enter your academy email !</p>
+        <p *ngIf="updateAcademyForm.get('email').errors.email"> Email format is not correct !</p>
       </div>
     </div>
   </div>
@@ -142,7 +143,7 @@
           updateAcademyForm.get('instituteAddress').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your academy location !</p>
       </div>
     </div>
@@ -173,7 +174,7 @@
           updateAcademyForm.get('instituteDescription').touched
         "
       >
-        <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+        
         <p>Please enter your academy description !</p>
       </div>
     </div>
@@ -183,7 +184,6 @@
       id="updateAcademy"
       class="btn addacademy"
       (click)="onUpdateAcademy()"
-      routerLink="/admin/add-academy"
     >
       Update academy
       <fa-icon class="fs-4 ms-2" [icon]="faChessBishop"></fa-icon>
