@@ -11,7 +11,6 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 
-
 namespace dotnetapp.Controller{
     [Route("")]
     [ApiController]
@@ -59,7 +58,6 @@ namespace dotnetapp.Controller{
         return Ok(new{Message = "Admin Registered :)"});
      }
         
-
         [HttpDelete("deleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
